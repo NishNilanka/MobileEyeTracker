@@ -54,6 +54,9 @@ Route::match(['GET', 'POST'], '/tutorial', function (Request $request) {
     }
 });
 
+//Route to generate the unique userid for Amaozon Mturk
+Route::get('uid', [App\Http\Controllers\UserIDController::class, 'generateID']);
+
 //Route to tahnk you page, only works if user has active session, otherwise redirects to main.
 Route::get('/thankyou', function (Request $request) {
     if (!$request->session()->exists('confirmed')) {
