@@ -234,11 +234,34 @@
 
         <!-- Video Player Div -->
         <div id="video_pop">
-            <video muted onended="vidEnd();" id="the_Video"><source src="{{URL::asset('blueball.mp4')}}" type="video/webm"></video>"
+            <video muted onended="vidEnd();" id="the_Video" preload="auto" src="" type="video/webm"></video>"
             </div>
         </body>
         <!-- JS for Video Player -->
         <script>
+		
+			var vid;
+			var req = new XMLHttpRequest();
+			req.open('GET', 'blueball.mp4', true);
+			req.responseType = 'blob';
+
+			req.onload = function() {
+			   // Onload is triggered even on 404
+			   // so we need to check the status code
+			   if (this.status === 200) {
+				  var videoBlob = this.response;
+				  vid = URL.createObjectURL(videoBlob); // IE10+
+				  // Video is now downloaded
+				  // and we can set it as source on the video element
+				document.getElementById("the_Video").src = vid;
+			   }
+			}
+			req.onerror = function() {
+			   // Error
+			}
+
+			req.send();
+		
             const videoSelect = document.querySelector('select#videoSource');
             const selectors = [videoSelect];
             const video = document.querySelector('video');
@@ -262,7 +285,8 @@
             // video
             function onVideoClick() {
                 console.log("LaunchedPlayer");
-                document.getElementById("the_Video").load();
+                
+				//document.getElementById("the_Video").load();
                 document.getElementById("video_pop").style.display="block";
             }
 
