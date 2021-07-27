@@ -62,8 +62,9 @@
       <div class="modal-footer">
           <form method="post" action="{{url('/demographic')}}">
             @csrf
-            <input type="checkbox" class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" name="consent">
-            <input type="submit" class="btn btn-success" value="I agree">
+            <!-- <input type="checkbox" class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" name="consent"> -->
+            <input type="submit" class="btn btn-success" value="I agree" value="1" id="flexCheckDefault" name="consent">
+            <input type="submit" class="btn btn-danger" value="I disagree">
       </form>
       </div>
     </div>

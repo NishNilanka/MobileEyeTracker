@@ -25,7 +25,7 @@ class VideoController extends Controller
         $dateTime1 = str_replace(":", ".", $dateTimeset);
         $dateTime = str_replace("-", ".",  $dateTime1);
 
-        $filename = $sessionId." ".$dateTime.".mkv";
+        $filename = $sessionId." ".$dateTime.".mp4";
         $filesize = filesize($request->file('video'));
         $recordingsURL=storage_path('app\recordings\recordings');
         $path = $request->file('video')->storeAs('recordings', $filename);

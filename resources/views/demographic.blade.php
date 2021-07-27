@@ -54,11 +54,9 @@
                                 <div class="form-group">
                                     <label for="ageInput">Age:</label>
                                     <select class="form-select form-select-sm" aria-label="Default select example" id="ageInput" name="ageInput">
-                                        <option>18-26</option>
-                                        <option>27-31</option>
-                                        <option>32-47</option>
-                                        <option>48-54</option>
-                                        <option>54-60+</option>
+                                        <?php for($i = 18; $i <= 75; $i += 1){
+											 echo("<option value='{$i}'>{$i}</option>");
+										}?>
                                     </select>
                                 </div>
                             </div>
@@ -70,9 +68,9 @@
                                         <div class="form-group">
                                 <label for="glassesInput"><p>Are you currently wearing any vision correction?</p></label>
                                 <select class="form-select form-select-sm" aria-label="Default select example" id="glassesInput" name="glassesInput">
+									<option>No</option>
                                     <option>Yes, glasses</option>
                                     <option>Yes, contact lenses</option>
-                                    <option>No</option>
                                 </select>
                             </div>
                                     </div>

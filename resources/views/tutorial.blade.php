@@ -412,7 +412,7 @@
                     });
 
                     mediaRecorder.onstop = (ev)=>{
-                        let blob = new Blob(vidchunks, { 'type' : 'video/webm;codecs=H265' });
+                        let blob = new Blob(vidchunks, { 'type' : 'video/webm' });
                         vidchunks = [];
                         let videoURL = window.URL.createObjectURL(blob);
 
