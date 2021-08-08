@@ -44,6 +44,9 @@
                     <p class="lead">We just require a bit of your information before we continue.</p>
                 </div>
             </center>
+           
+
+            </script>
             <hr size="4px;">
                 <div class="container">
                     <form role="form" method="POST" action="/post">
@@ -53,7 +56,8 @@
                                     <div class="col-md-4 col-centered">
                                 <div class="form-group">
                                     <label for="ageInput">Age:</label>
-                                    <select class="form-select form-select-sm" aria-label="Default select example" id="ageInput" name="ageInput">
+                                    <select class="form-select form-select-sm" aria-label="Default select example" id="ageInput" name="ageInput" required onchange="enableButton()">
+                                        <option value="">Select</option>
                                         <?php for($i = 18; $i <= 75; $i += 1){
 											 echo("<option value='{$i}'>{$i}</option>");
 										}?>
@@ -67,8 +71,9 @@
                                     <div class="col-md-4 col-centered">
                                         <div class="form-group">
                                 <label for="glassesInput"><p>Are you currently wearing any vision correction?</p></label>
-                                <select class="form-select form-select-sm" aria-label="Default select example" id="glassesInput" name="glassesInput">
-									<option>No</option>
+                                <select class="form-select form-select-sm" aria-label="Default select example" id="glassesInput" name="glassesInput" required onchange="enableButton()">
+                                    <option value="">Select</option>	
+                                    <option>No</option>
                                     <option>Yes, glasses</option>
                                     <option>Yes, contact lenses</option>
                                 </select>
@@ -80,11 +85,12 @@
                     <div class="row">
                         <div class="col-md-4 col-centered">
                             <label for="genderInput">Gender:</label>
-                            <select class="form-select form-select-sm" aria-label="Default select example" id="genderInput" name="genderInput">
-                                <option>Male</option>
-                                <option>Female</option>
-                                <option>Non-binary</option>
-                                <option>I'm not represented or prefer not to say</option>
+                            <select class="form-select form-select-sm" aria-label="Default select example" id="genderInput" name="genderInput" required onchange="enableButton()">
+                            <option value="">Select</option>
+                            <option value="0">Male</option>
+                                <option value="1">Female</option>
+                                <option value="2">Non-binary</option>
+                                <option value="3">I'm not represented or prefer not to say</option>
                             </select>
                         </div>
                     </div>
@@ -93,7 +99,7 @@
                         <div class="row">
                             <center>
                                 <br>
-                                <button class="btn btn-lg btn-primary" href="/tutorial" style="margin-top: 20px;">Submit</button>
+                                <button id="SubmitBtn" class="btn btn-lg btn-primary" href="/tutorial" style="margin-top: 20px;" disabled>Submit</button>
                             </center>
                         </div>
                     </div>
@@ -116,6 +122,18 @@
 };
 
 window.onload = mobileOrTabletCheck();
+
+
+function enableButton()
+{
+    var selectedgender = document.getElementById('genderInput');
+    var selectedglasses = document.getElementById('glassesInput');
+    var selectedage = document.getElementById('ageInput');
+    var btnelem = document.getElementById('SubmitBtn');
+    btnelem.disabled = !selectedgender.value || !selectedglasses.value || !selectedage.value;
+}
+
+   
 </script>
 
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
