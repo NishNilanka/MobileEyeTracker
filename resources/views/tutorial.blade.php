@@ -85,6 +85,7 @@
 </head>
 <div id="videoUpload" style="display: none">
     <img src="loadingloop.gif" alt="Loading" style="width: 50%; height: auto; padding-top: 100px">
+    <!-- <progress ref="seekbar" style="width: 50%; height: auto; padding-top: 100px" value="0" max="100" id="progressbar"></progress>-->
 </div>
 <body>
     <!-- Navbar -->
@@ -104,6 +105,12 @@
         <div id="vidplayer" class="col-xs-12 col-xs-offset-6">
             <center>
                         <div id="pageElements">
+                        <center>
+                            <div class="select">
+                                <label for="videoSource">Video source: </label><select class="form-select form-select-sm" aria-label="Default select example" id="videoSource"><option value="0b594e15d526d89e31577795a49ed144e932c3cc02ce75ac49098516e5596593">Integrated Webcam (0c45:644a)</option><option value="ef6b3a44d7b0601405dfef8e8f9cbee8b734556064a2e58c3c2f39ab9920c1c8">Logitech HD Webcam C270 (046d:0825)</option><option value="94faf5d1f556aef8132c4080c0027db6f95aa5708702791db8f6f90c245c681d">Logi Capture</option><option value="c8a9817bc80e7b0f5d79733a5325bccaee6e4398f2a6cbf4148daa08589467cc">OBS Virtual Camera</option></select>
+                            </div>
+                            <button type="button" class="btn btn-lg btn-success" onclick="startplayer();">Select Device</button>
+                        </center>
                             <!--  Webcam Div -->
                             <div id="vidcontainer">
                                 <div id="videoOverlay">
@@ -115,14 +122,7 @@
                                 </video>
                             </div>
                         </center>
-                        <center>
-                            <div class="select">
-                                <label for="videoSource">Video source: </label><select class="form-select form-select-sm" aria-label="Default select example" id="videoSource"></select>
-                            </div>
-                            <button type="button" class="btn btn-lg btn-success" onclick="startplayer();" >Select Device</button>
-                        </div>
-                    </center>
-                </div>
+                        
                 <br><br>
                 <center>
                     <button  id="beginbutton" onlick="startRecorder();" type="button" class="btn btn-lg btn-primary" style="width: 30%;margin-bottom: 5%;">
@@ -410,9 +410,9 @@
                         mediaRecorder.stop();
                         console.log(mediaRecorder.state);
                     });
-
+var timerId;
                     mediaRecorder.onstop = (ev)=>{
-                        let blob = new Blob(vidchunks, { 'type' : 'video/webm' });
+                        let blob = new Blob(vidchunks, { 'type' : 'video/mp4' });
                         vidchunks = [];
                         let videoURL = window.URL.createObjectURL(blob);
 
@@ -420,13 +420,15 @@
 
                         //generate form
                         const formData = new FormData();
-                        formData.append("_token", '{{ csrf_token()}}')
-                        formData.append('video', blob)
+                        formData.append("_token", '{{ csrf_token()}}');
+                        formData.append('video', blob);
+                        progressBarTimer();
                         fetch('videoRec', {
                             method: 'post',
                             body: formData
                         })
                         .then(response => {console.log('upload success');
+                        clearInterval(timerId);
                         var OptModal = new bootstrap.Modal(document.getElementById('OptModal'), {});
                         OptModal.show();
                         })
@@ -438,6 +440,20 @@
                 });
                 console.log('Created Recorder using:', videoSource);
             }
+
+            function progressBarTimer(){
+                timerId =  setTimeout(function () {
+                const progressbar = document.getElementById('progressbar');
+                progressbar.value = elapsedTime / 100;
+                elapsedTime = elapsedTime+1000;
+            }, 1000);
+            }
+            elapsedTime = 0;
+
+            
+
+
+
 
             function gotStream(stream) {
                 window.stream = stream; // make stream available to console

@@ -47,24 +47,41 @@
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="termsModalLabel">Terms & Conditions</h5>
+        <h5 class="modal-title" id="termsModalLabel">Consents</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        We at Western Sydney University respect the privacy of your personal information and, as such, make every effort to ensure your information is protected and remains private. As the owner and operator of loremipsum.io (the "Website") hereafter referred to in this Privacy Policy as "Lorem Ipsum", "us", "our" or "we", we have provided this Privacy Policy to explain how we collect, use, share and protect information about the users of our Website (hereafter referred to as “user”, “you” or "your"). For the purposes of this Agreement, any use of the terms "Lorem Ipsum", "us", "our" or "we" includes Western Sydney University, without limitation. We will not use or share your personal information with anyone except as described in this Privacy Policy.
-<br><br>
-        This Privacy Policy will inform you about the types of personal data we collect, the purposes for which we use the data, the ways in which the data is handled and your rights with regard to your personal data. Furthermore, this Privacy Policy is intended to satisfy the obligation of transparency under the EU General Data Protection Regulation 2016/679 ("GDPR") and the laws implementing GDPR. For the purpose of this Privacy Policy the Data Controller of personal data is Western Sydney University and our contact details are set out in the Contact section at the end of this Privacy Policy.
-<br><br>
-        Data Controller means the natural or legal person who (either alone or jointly or in common with other persons) determines the purposes for which and the manner in which any personal information are, or are to be, processed. For purposes of this Privacy Policy, "Your Information" or "Personal Data" means information about you, which may be of a confidential or sensitive nature and may include personally identifiable information ("PII") and/or financial information. PII means individually identifiable information that would allow us to determine the actual identity of a specific living person, while sensitive data may include information, comments, content and other information that you voluntarily provide.
-<br><br>
-        BY ACCESSING OR USING OUR SERVICES, YOU CONSENT TO THE COLLECTION, TRANSFER, MANIPULATION, STORAGE, DISCLOSURE AND OTHER USES OF YOUR INFORMATION (COLLECTIVELY, "USE OF YOUR INFORMATION") AS DESCRIBED IN THIS PRIVACY POLICY. IF YOU DO NOT AGREE WITH OR CONSENT TO THIS PRIVACY POLICY YOU MAY NOT ACCESS OR USE OUR SERVICES.
+      <strong> Project Title: Mobile Device Eye Tracking using Edge Computing to Capture Attention Hotspots on Dynamic Visual Contents</strong>
+      <br>
+      This study has been approved by the Human Research Ethics Committee at Western Sydney University. The ethics reference number is: H14493
+<br>
+<br>
+        <p><strong>I hereby consent to participate in the above named research project.</strong></p>
+        <p><br /><strong>I acknowledge that:</strong></p>
+        <ul>
+        <li>I have read the participant information sheet (or where appropriate, have had it read to me) and have been given the opportunity to discuss the information and my involvement in the project with the researcher/s</li>
+        <li>The procedures required for the project and the time involved have been explained to me, and any questions I have about the project have been answered to my satisfaction.</li>
+        </ul>
+        <p><strong>I consent to:</strong></p>
+        <p style="padding-left: 40px;">Having my face video recorded</p>
+
+        <strong> 
+        <ul> 
+          <li>I consent for my data and information provided to be used in this project and other related projects for an extended period of time. </li>
+          <li> I understand information gained during the study may be published and stored for other research use. The information may potentially reveal my identity.</li>
+          <li> I understand that I can withdraw from the study at any time without affecting my relationship with the researcher/s, and any organisations involved, now or in the future.</li></strong>
+<br>
+If you have any complaints or reservations about the ethical conduct of this research, you may contact the Ethics Committee through Research Engagement, Development and Innovation (REDI) on; <br >Tel -  +61 2 4736 0229 or <br>email- <a href="mailto:humanethics@westernsydney.edu.au">humanethics@westernsydney.edu.au</a>.
+<br>
+Any issues you raise will be treated in confidence and investigated fully, and you will be informed of the outcome. 
+<br>
       </div>
       <div class="modal-footer">
           <form method="post" action="{{url('/demographic')}}">
             @csrf
             <!-- <input type="checkbox" class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" name="consent"> -->
             <input type="submit" class="btn btn-success" value="I agree" value="1" id="flexCheckDefault" name="consent">
-            <input type="submit" class="btn btn-danger" value="I disagree">
+            <input type="button" class="btn btn-danger" onClick="document.location.href='http://www.google.com'" value="I disagree">
       </form>
       </div>
     </div>
