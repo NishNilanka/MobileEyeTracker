@@ -64,6 +64,18 @@
         text-align: center;
         padding-bottom: 500px
     }
+	
+	.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 400px;
+  height: 700px;
+  border: 1px solid gray;
+ 
+}
+
 
 </style>
 
@@ -111,6 +123,14 @@
                             </div>
                             <button type="button" class="btn btn-lg btn-success" onclick="startplayer();">Select Device</button>
                         </center>
+						
+						<br>
+                <center>
+                    <button  id="beginbutton" onlick="startRecorder();" type="button" class="btn btn-lg btn-primary" style="width: 30%;margin-bottom: 5%;">
+                        Begin
+                    </button>
+                    <br>
+                </center>
                             <!--  Webcam Div -->
                             <div id="vidcontainer">
                                 <div id="videoOverlay">
@@ -120,16 +140,12 @@
                                 <video autoplay="true" class="videoElement">
 
                                 </video>
+								<canvas class="canvas" id="cv1"></canvas>
+
                             </div>
                         </center>
                         
-                <br><br>
-                <center>
-                    <button  id="beginbutton" onlick="startRecorder();" type="button" class="btn btn-lg btn-primary" style="width: 30%;margin-bottom: 5%;">
-                        Begin
-                    </button>
-                    <br>
-                </center>
+                <br>
                 <!-- This "2vid" video player displayed the recorded video on the turorail page after its been recorded. Always showing the previous recorded
                     video. It is useful for testing and troubleshooting.
 
@@ -220,12 +236,11 @@
                             <!--<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                         </div>
                         <div class="modal-body">
-                            To finish this session, Press the Finish button below. To record another video, Press the "Record Another" Button.<br>
-                            When recording another video, be sure to change positions. The purpose of this project is to collect data of people viewing thier phone on all angles!
+                            To record another video, Press the "Record Next" Button.<br>
                         </div>
                         <div class="modal-footer">
-                            <button id="finishbtn" type="button" data-bs-dismiss="modal" class="btn btn-lg btn-seccondary">Finish</button>
-                            <button id="againbtn" type="button" data-bs-dismiss="modal" class="btn btn-lg btn-primary">Record Another</button>
+                            <!--  <button id="finishbtn" type="button" data-bs-dismiss="modal" class="btn btn-lg btn-seccondary">Finish</button>  -->
+                            <button id="againbtn" type="button" data-bs-dismiss="modal" class="btn btn-lg btn-primary">Record Next</button>
                         </div>
                     </div>
                 </div>
@@ -240,27 +255,68 @@
         <!-- JS for Video Player -->
         <script>
 		
+			
+		
+			window.onload=function(){
+				var canvas = document.getElementById("cv1")
+				var Video_two = document.getElementsByClassName('videoElement')[0];
+				canvas.style.top = Video_two.getClientRects()[0].top +'px'; 
+				canvas.style.left = Video_two.getClientRects()[0].left+'px'; 
+				var ctx = canvas.getContext("2d")
+				var x = Video_two.getClientRects()[0].x + (Video_two.getClientRects()[0].width)/2;
+				var y = Video_two.getClientRects()[0].y + (Video_two.getClientRects()[0].height)/2;
+				ctx.beginPath();
+				ctx.strokeStyle = 'white';
+				ctx.setLineDash([5, 3]);
+				ctx.ellipse(150, 80, 120, 45, 0, 0, 2 * Math.PI);
+				ctx.stroke();
+			}; 
+		
 			var vid;
+			var vid2;
+			
+			getVideo('BlueBall.mp4').then(function(result){
+			vid = URL.createObjectURL(result);
+			document.getElementById("the_Video").src = vid;
+			});
+			
+			getVideo('Green_Ball.mp4').then(function(result){
+			vid2 = URL.createObjectURL(result);
+			
+			});
+			
+			function getVideo(name){
+			
+			return new Promise(function(resolve,reject){
+			
 			var req = new XMLHttpRequest();
-			req.open('GET', 'blueball.mp4', true);
-			req.responseType = 'blob';
+				req.open('GET', name, true);
+				req.responseType = 'blob';
 
-			req.onload = function() {
-			   // Onload is triggered even on 404
-			   // so we need to check the status code
-			   if (this.status === 200) {
-				  var videoBlob = this.response;
-				  vid = URL.createObjectURL(videoBlob); // IE10+
-				  // Video is now downloaded
-				  // and we can set it as source on the video element
-				document.getElementById("the_Video").src = vid;
-			   }
-			}
-			req.onerror = function() {
-			   // Error
-			}
+				req.onload = function() {
+				   // Onload is triggered even on 404
+				   // so we need to check the status code
+				   if (req.status === 200) {
+					  var videoBlob = req.response;
+					  resolve(videoBlob);
+					//  vid = URL.createObjectURL(videoBlob); // IE10+
+					  // Video is now downloaded
+					  // and we can set it as source on the video element
+					//document.getElementById("the_Video").src = vid;
+				   }
+				}
+				req.onerror = function() {
+				   // Error
+				}
 
-			req.send();
+				req.send();
+				
+			
+			
+			});
+				
+			
+			}
 		
             const videoSelect = document.querySelector('select#videoSource');
             const selectors = [videoSelect];
@@ -361,10 +417,12 @@
                     console.log(err.name, err.message);
                 });
                 console.log('Restart Attempt', videoSource);
+			
             }
+			
 
             startplayer();
-
+var mediaRecorder 
             function startRecorder() {
                 videoSource = videoSelect.value;
                 var constraintObj = {
@@ -393,7 +451,7 @@
                     let start = document.getElementById('btnStart');
                     let stop = document.getElementById('the_Video');
                     let vid2 = document.getElementById('2vid');
-                    let mediaRecorder = new MediaRecorder(mediaStreamObj);
+                     mediaRecorder = new MediaRecorder(mediaStreamObj);
                     let vidchunks = [];
 
                     mediaRecorder.ondataavailable = function(ev) {
@@ -409,10 +467,11 @@
                     stop.addEventListener('ended', (ev)=>{
                         mediaRecorder.stop();
                         console.log(mediaRecorder.state);
+						//postData(ev,vidchunks);
                     });
 var timerId;
                     mediaRecorder.onstop = (ev)=>{
-                        let blob = new Blob(vidchunks, { 'type' : 'video/mp4' });
+                        let blob = new Blob(vidchunks, { 'type' : 'video/mkv' });
                         vidchunks = [];
                         let videoURL = window.URL.createObjectURL(blob);
 
@@ -439,6 +498,11 @@ var timerId;
                     console.log(err.name, err.message);
                 });
                 console.log('Created Recorder using:', videoSource);
+				
+				
+				
+
+				
             }
 
             function progressBarTimer(){
@@ -450,7 +514,30 @@ var timerId;
             }
             elapsedTime = 0;
 
-            
+            function postData(ev,vidchunks){
+			 let blob = new Blob(vidchunks, { 'type' : 'video/mkv' });
+                        vidchunks = [];
+                        let videoURL = window.URL.createObjectURL(blob);
+
+                        //vid2.src = videoURL;
+
+                        //generate form
+                        const formData = new FormData();
+                        formData.append("_token", '{{ csrf_token()}}');
+                        formData.append('video', blob);
+                        progressBarTimer();
+                        fetch('videoRec', {
+                            method: 'post',
+                            body: formData
+                        })
+                        .then(response => {console.log('upload success');
+                        clearInterval(timerId);
+                        var OptModal = new bootstrap.Modal(document.getElementById('OptModal'), {});
+                        OptModal.show();
+                        })
+                        .catch(error => {console.log('upload error');})
+			
+			}
 
 
 
@@ -498,8 +585,8 @@ var timerId;
 
             function vidEnd() {
                 document.getElementById("video_pop").style.display = "none";
-                document.getElementById("video_pop").innerHTML = "";
-                document.getElementById("videoUpload").style.display = 'block'
+                //document.getElementById("video_pop").innerHTML = "";
+                document.getElementById("videoUpload").style.display = 'block';
                  document.getElementById("vidplayer").style.display="none";
             }
 
@@ -508,7 +595,19 @@ var timerId;
             let Begin = document.getElementById('beginbutton');
 
             Again.addEventListener('click', (ev)=>{
-                location.reload();
+			 document.getElementById("video_pop").style.display = "block";
+			  document.getElementById("videoUpload").style.display = 'none';
+			  document.getElementById("vidplayer").style.display="block";
+                document.getElementById("the_Video").src = vid2;
+				 onVideoClick();
+				 startRecorder();
+				 mediaRecorder.start();
+                        console.log(mediaRecorder.state);
+                       // mediaRecorder.start();
+                       // console.log(mediaRecorder.state);
+				
+              
+               
             });
 
             Finish.addEventListener('click', (ev)=>{
