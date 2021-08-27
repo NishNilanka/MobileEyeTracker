@@ -66,7 +66,7 @@
     }
 	
 	.canvas {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   z-index: 10;
@@ -119,9 +119,9 @@
                         <div id="pageElements">
                         <center>
                             <div class="select">
-                                <label for="videoSource">Video source: </label><select class="form-select form-select-sm" aria-label="Default select example" id="videoSource"><option value="0b594e15d526d89e31577795a49ed144e932c3cc02ce75ac49098516e5596593">Integrated Webcam (0c45:644a)</option><option value="ef6b3a44d7b0601405dfef8e8f9cbee8b734556064a2e58c3c2f39ab9920c1c8">Logitech HD Webcam C270 (046d:0825)</option><option value="94faf5d1f556aef8132c4080c0027db6f95aa5708702791db8f6f90c245c681d">Logi Capture</option><option value="c8a9817bc80e7b0f5d79733a5325bccaee6e4398f2a6cbf4148daa08589467cc">OBS Virtual Camera</option></select>
+                                <label for="videoSource">Video source: </label><select class="form-select form-select-sm" aria-label="Default select example" id="videoSource"></select>
                             </div>
-                            <button type="button" class="btn btn-lg btn-success" onclick="startplayer();">Select Device</button>
+                            <button type="button" class="btn btn-lg btn-success" onclick="startplayer();" >Select Device</button>
                         </center>
 						
 						<br>
@@ -140,7 +140,7 @@
                                 <video autoplay="true" class="videoElement">
 
                                 </video>
-								<canvas class="canvas" id="cv1"></canvas>
+								<!-- <canvas class="canvas" id="cv1"></canvas>  -->
 
                             </div>
                         </center>
@@ -239,7 +239,7 @@
                             To record another video, Press the "Record Next" Button.<br>
                         </div>
                         <div class="modal-footer">
-                            <!--  <button id="finishbtn" type="button" data-bs-dismiss="modal" class="btn btn-lg btn-seccondary">Finish</button>  -->
+                            <button id="finishbtn" type="button" data-bs-dismiss="modal" class="btn btn-lg btn-seccondary">Finish</button>  
                             <button id="againbtn" type="button" data-bs-dismiss="modal" class="btn btn-lg btn-primary">Record Next</button>
                         </div>
                     </div>
@@ -274,6 +274,8 @@
 		
 			var vid;
 			var vid2;
+			var vid3;
+			var vidCurrentPlayingNumber = 1;
 			
 			getVideo('BlueBall.mp4').then(function(result){
 			vid = URL.createObjectURL(result);
@@ -282,6 +284,11 @@
 			
 			getVideo('Green_Ball.mp4').then(function(result){
 			vid2 = URL.createObjectURL(result);
+			
+			});
+			
+		    getVideo('Red_Ball.mp4').then(function(result){
+			vid3 = URL.createObjectURL(result);
 			
 			});
 			
@@ -380,6 +387,7 @@
             navigator.mediaDevices.enumerateDevices().then(gotDevices).catch(handleError);
 
             function handleError(error) {
+			console.log(error);
                 //console.log('navigator.MediaDevices.getUserMedia error: ', error.message, error.name);
             }
 
@@ -451,7 +459,10 @@ var mediaRecorder
                     let start = document.getElementById('btnStart');
                     let stop = document.getElementById('the_Video');
                     let vid2 = document.getElementById('2vid');
-                     mediaRecorder = new MediaRecorder(mediaStreamObj);
+					if(!mediaRecorder){
+					 mediaRecorder = new MediaRecorder(mediaStreamObj);
+					}
+                    
                     let vidchunks = [];
 
                     mediaRecorder.ondataavailable = function(ev) {
@@ -467,10 +478,11 @@ var mediaRecorder
                     stop.addEventListener('ended', (ev)=>{
                         mediaRecorder.stop();
                         console.log(mediaRecorder.state);
-						//postData(ev,vidchunks);
+						
                     });
 var timerId;
                     mediaRecorder.onstop = (ev)=>{
+					//mediaRecorder = null;
                         let blob = new Blob(vidchunks, { 'type' : 'video/mkv' });
                         vidchunks = [];
                         let videoURL = window.URL.createObjectURL(blob);
@@ -489,7 +501,15 @@ var timerId;
                         .then(response => {console.log('upload success');
                         clearInterval(timerId);
                         var OptModal = new bootstrap.Modal(document.getElementById('OptModal'), {});
-                        OptModal.show();
+                       
+						if(vidCurrentPlayingNumber >= 3){
+							document.getElementById("finishbtn").style.display="block";
+							document.getElementById("againbtn").style.display="none";
+						}else{
+						document.getElementById("finishbtn").style.display="none";
+							document.getElementById("againbtn").style.display="block";
+						}
+						 OptModal.show();
                         })
                         .catch(error => {console.log('upload error');})
                     }
@@ -513,33 +533,6 @@ var timerId;
             }, 1000);
             }
             elapsedTime = 0;
-
-            function postData(ev,vidchunks){
-			 let blob = new Blob(vidchunks, { 'type' : 'video/mkv' });
-                        vidchunks = [];
-                        let videoURL = window.URL.createObjectURL(blob);
-
-                        //vid2.src = videoURL;
-
-                        //generate form
-                        const formData = new FormData();
-                        formData.append("_token", '{{ csrf_token()}}');
-                        formData.append('video', blob);
-                        progressBarTimer();
-                        fetch('videoRec', {
-                            method: 'post',
-                            body: formData
-                        })
-                        .then(response => {console.log('upload success');
-                        clearInterval(timerId);
-                        var OptModal = new bootstrap.Modal(document.getElementById('OptModal'), {});
-                        OptModal.show();
-                        })
-                        .catch(error => {console.log('upload error');})
-			
-			}
-
-
 
 
             function gotStream(stream) {
@@ -595,15 +588,29 @@ var timerId;
             let Begin = document.getElementById('beginbutton');
 
             Again.addEventListener('click', (ev)=>{
+			vidCurrentPlayingNumber++;
 			 document.getElementById("video_pop").style.display = "block";
 			  document.getElementById("videoUpload").style.display = 'none';
 			  document.getElementById("vidplayer").style.display="block";
-                document.getElementById("the_Video").src = vid2;
-				 onVideoClick();
-				 startRecorder();
-				 mediaRecorder.start();
-                        console.log(mediaRecorder.state);
-                       // mediaRecorder.start();
+			  if(vidCurrentPlayingNumber == 2){
+			  document.getElementById("the_Video").src = vid2;
+			  } else if(vidCurrentPlayingNumber==3){
+			   document.getElementById("the_Video").src = vid3;
+			  }
+                
+				//startplayer();
+				 //startRecorder();
+				
+				 setTimeout(function(){
+				  mediaRecorder.start();
+				   console.log(mediaRecorder.state);
+				  onVideoClick();
+				
+				 },2000);
+				
+				// mediaRecorder.resume();
+                       
+                        
                        // console.log(mediaRecorder.state);
 				
               

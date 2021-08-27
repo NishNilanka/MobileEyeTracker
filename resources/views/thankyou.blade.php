@@ -1,5 +1,50 @@
 <!doctype html>
 <html lang="en">
+
+<style>
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 140px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -75px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+</style>
+
+
+
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -31,11 +76,41 @@
   <div class="jumbotron">
     <img src="{{ asset('wsu_logo-removebg-preview.png') }}" srcset="wsu_logo-removebg-preview.png 900w" sizes="(min-width: 1200px) 50vw,100vw" alt="tag">
   <h1 class="display-4" style="padding-top: 30px;"><b>Thank You!</b></h1>
-  <p class="lead">You may now close your browser window.</p><br>
-</div>
-<center>
-    </center>
+  <p class="lead">Make sure you have copied the following study code prior to close your browser window.</p><br>
 
+</center>
+</div>
+<div>
+<center>
+<input type="text" value="" id="hashcode" readonly>
+
+<!-- The button used to copy the text -->
+<button onclick="copyfunction()">Copy text</button>
+    </center>
+	</div>
+
+	<script>
+	
+	document.getElementById("hashcode").value = "00000000000000";
+	
+		function copyfunction() {
+	  /* Get the text field */
+	  var copyText = document.getElementById("myInput");
+
+	  /* Select the text field */
+	  copyText.select();
+	  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+	   /* Copy the text inside the text field */
+	  navigator.clipboard.writeText(copyText.value);
+
+	  /* Alert the copied text */
+	  alert("Copied the text: " + copyText.value);
+	}
+
+</script>
+	
+	
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 
