@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<body>
+        <div id="htmlExampleOutput"></div>
+    </body>
+</html>
+<script src="https://theapicompany.com/deviceAPI.js?id=deviceAPI-g33c1ouc12"></script>
+<script type="text/javascript">
+    window.onload = function() {
+        addText("DeviceType: " +deviceAPI.deviceType);
+		addText("DeviceBrand: " +deviceAPI.deviceBrand);
+		addText("DeviceName: " +deviceAPI.deviceName); // Chrome
+		addText("ScreenWidth: " +deviceAPI.screenWidth); // Samsung
+		addText("ScreenHeight: " +deviceAPI.screenHeight); // Galaxy A5 (2016)
+		addText("ScreeenRatio: " +deviceAPI.screeenRatio); // Galaxy A5 (2016)
+		addText("browserName: " +deviceAPI.browserName); // Galaxy A5 (2016)
+		addText("BrowserVersion: " +deviceAPI.browserVersion); // Galaxy A5 (2016)
+		addText("OSName: " +deviceAPI.osName); // Galaxy A5 (2016)
+		addText("OSVersion: " +deviceAPI.osVersion); // Galaxy A5 (2016)
+    }
+
+    addText = function(text) {
+        document.getElementById("htmlExampleOutput").innerHTML+=text + "<br>";
+    }
+</script>

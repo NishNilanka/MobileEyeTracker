@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<body>
+        <div id="htmlExampleOutput"></div>
+    </body>
+</html>
+<script type="text/javascript" src="//js.frubil.info/"></script>
+<script type="text/javascript">
+    window.onload = function() {
+        addText(FRUBIL.device.class);
+		addText(FRUBIL.client.class);
+		addText(FRUBIL.client.name); // Chrome
+		addText(FRUBIL.device.brand); // Samsung
+		addText(FRUBIL.device.marketname); // Galaxy A5 (2016)
+    }
+
+    addText = function(text) {
+        document.getElementById("htmlExampleOutput").innerHTML+=text + "<br>";
+    }
+</script>
