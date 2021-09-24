@@ -6,10 +6,10 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Session Driver
+    | Default  Driver
     |--------------------------------------------------------------------------
     |
-    | This option controls the default session "driver" that will be used on
+    | This option controls the default  "driver" that will be used on
     | requests. By default, we will use the lightweight native driver but
     | you may specify any of the other wonderful drivers provided here.
     |
@@ -18,31 +18,31 @@ return [
     |
     */
 
-    'driver' => env('SESSION_DRIVER', 'file'),
+    'driver' => env('_DRIVER', 'file'),
 
     /*
     |--------------------------------------------------------------------------
-    | Session Lifetime
+    |  Lifetime
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the number of minutes that you wish the session
+    | Here you may specify the number of minutes that you wish the 
     | to be allowed to remain idle before it expires. If you want them
     | to immediately expire on the browser closing, set that option.
     |
     */
 
-    'lifetime' => env('SESSION_LIFETIME', 120),
+    'lifetime' => env('_LIFETIME', 120),
 
     'expire_on_close' => false,
 
     /*
     |--------------------------------------------------------------------------
-    | Session Encryption
+    |  Encryption
     |--------------------------------------------------------------------------
     |
-    | This option allows you to easily specify that all of your session data
+    | This option allows you to easily specify that all of your  data
     | should be encrypted before it is stored. All encryption will be run
-    | automatically by Laravel and you can use the Session like normal.
+    | automatically by Laravel and you can use the  like normal.
     |
     */
 
@@ -50,65 +50,65 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Session File Location
+    |  File Location
     |--------------------------------------------------------------------------
     |
-    | When using the native session driver, we need a location where session
+    | When using the native  driver, we need a location where 
     | files may be stored. A default has been set for you but a different
-    | location may be specified. This is only needed for file sessions.
+    | location may be specified. This is only needed for file s.
     |
     */
 
-    'files' => storage_path('framework/sessions'),
+    'files' => storage_path('framework/s'),
 
     /*
     |--------------------------------------------------------------------------
-    | Session Database Connection
+    |  Database Connection
     |--------------------------------------------------------------------------
     |
-    | When using the "database" or "redis" session drivers, you may specify a
-    | connection that should be used to manage these sessions. This should
+    | When using the "database" or "redis"  drivers, you may specify a
+    | connection that should be used to manage these s. This should
     | correspond to a connection in your database configuration options.
     |
     */
 
-    'connection' => env('SESSION_CONNECTION', null),
+    'connection' => env('_CONNECTION', null),
 
     /*
     |--------------------------------------------------------------------------
-    | Session Database Table
+    |  Database Table
     |--------------------------------------------------------------------------
     |
-    | When using the "database" session driver, you may specify the table we
-    | should use to manage the sessions. Of course, a sensible default is
+    | When using the "database"  driver, you may specify the table we
+    | should use to manage the s. Of course, a sensible default is
     | provided for you; however, you are free to change this as needed.
     |
     */
 
-    'table' => 'sessions',
+    'table' => 's',
 
     /*
     |--------------------------------------------------------------------------
-    | Session Cache Store
+    |  Cache Store
     |--------------------------------------------------------------------------
     |
-    | While using one of the framework's cache driven session backends you may
-    | list a cache store that should be used for these sessions. This value
+    | While using one of the framework's cache driven  backends you may
+    | list a cache store that should be used for these s. This value
     | must match with one of the application's configured cache "stores".
     |
     | Affects: "apc", "dynamodb", "memcached", "redis"
     |
     */
 
-    'store' => env('SESSION_STORE', null),
+    'store' => env('_STORE', null),
 
     /*
     |--------------------------------------------------------------------------
-    | Session Sweeping Lottery
+    |  Sweeping Lottery
     |--------------------------------------------------------------------------
     |
-    | Some session drivers must manually sweep their storage location to get
-    | rid of old sessions from storage. Here are the chances that it will
+    | Some  drivers must manually sweep their storage location to get
+    | rid of old s from storage. Here are the chances that it will
     | happen on a given request. By default, the odds are 2 out of 100.
     |
     */
@@ -117,26 +117,26 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Session Cookie Name
+    |  Cookie Name
     |--------------------------------------------------------------------------
     |
-    | Here you may change the name of the cookie used to identify a session
+    | Here you may change the name of the cookie used to identify a 
     | instance by ID. The name specified here will get used every time a
-    | new session cookie is created by the framework for every driver.
+    | new  cookie is created by the framework for every driver.
     |
     */
 
     'cookie' => env(
-        'SESSION_COOKIE',
-        Str::slug(env('APP_NAME', 'laravel'), '_').'_session'
+        '_COOKIE',
+        Str::slug(env('APP_NAME', 'laravel'), '_').'_'
     ),
 
     /*
     |--------------------------------------------------------------------------
-    | Session Cookie Path
+    |  Cookie Path
     |--------------------------------------------------------------------------
     |
-    | The session cookie path determines the path for which the cookie will
+    | The  cookie path determines the path for which the cookie will
     | be regarded as available. Typically, this will be the root path of
     | your application but you are free to change this when necessary.
     |
@@ -146,29 +146,29 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Session Cookie Domain
+    |  Cookie Domain
     |--------------------------------------------------------------------------
     |
-    | Here you may change the domain of the cookie used to identify a session
+    | Here you may change the domain of the cookie used to identify a 
     | in your application. This will determine which domains the cookie is
     | available to in your application. A sensible default has been set.
     |
     */
 
-    'domain' => env('SESSION_DOMAIN', null),
+    'domain' => env('_DOMAIN', null),
 
     /*
     |--------------------------------------------------------------------------
     | HTTPS Only Cookies
     |--------------------------------------------------------------------------
     |
-    | By setting this option to true, session cookies will only be sent back
+    | By setting this option to true,  cookies will only be sent back
     | to the server if the browser has a HTTPS connection. This will keep
     | the cookie from being sent to you if it can not be done securely.
     |
     */
 
-    'secure' => env('SESSION_SECURE_COOKIE'),
+    'secure' => env('_SECURE_COOKIE'),
 
     /*
     |--------------------------------------------------------------------------

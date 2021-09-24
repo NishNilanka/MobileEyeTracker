@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 
@@ -148,6 +149,8 @@
                             <center>
                                 <br>
                                 <button id="SubmitBtn" class="btn btn-lg btn-primary" href="/tutorial" style="margin-top: 20px;" disabled>Submit</button>
+								<p></p>
+								<p></p>
                             </center>
                         </div>
                     </div>
@@ -251,6 +254,7 @@ $(document).ready(function() {
     }
   });
 });
+
 
 
 function setValue(key, value) {

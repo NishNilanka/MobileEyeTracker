@@ -30,19 +30,19 @@ Route::get('/', function () {
 //Route to demographics page, requires consentAgree
 Route::match(['GET', 'POST'], '/demographic', [App\Http\Controllers\consentAgree::class, 'confirm']);
 
-// Route to tutorial page has included statements to ensure people are in a session and they cant record more than 3 recordings.
+// Route to tutorial page has included statements to ensure people are in a  and they cant record more than 3 recordings.
 Route::match(['GET', 'POST'], '/tutorial', function (Request $request) {
-    //no entry if session doesn't exist
+    //no entry if  doesn't exist
     //This checks the ammount of recordings created under the sid, not allowing further access to those that have recorded 3 or more.
-    // Pull session ID
-    $sid = session('sid');
+    // Pull  ID
+    $sid = ('sid');
     //count ammount of table entries with sid
     $dbStatement = "SELECT COUNT(sid) from filesystem where sid = '" . $sid . "'";
     $recCount = DB::select($dbStatement);
     //a string as the object below requires string in variable and not string alone e.g. $recCount[0]->"COUNT(sid)"; is a syntax error
     $cnt = "COUNT(sid)";
     $count = $recCount[0]->$cnt;
-    if (!$request->session()->exists('confirmed')) {
+    if (!$request->()->exists('confirmed')) {
         return redirect('/');
     }
     //checks if returned count is greater or equal to 3. If it is, it redirects to task completed page
@@ -57,13 +57,13 @@ Route::match(['GET', 'POST'], '/tutorial', function (Request $request) {
 //Route to generate the unique userid for Amaozon Mturk
 Route::get('uid', [App\Http\Controllers\UserIDController::class, 'generateID']);
 
-//Route to tahnk you page, only works if user has active session, otherwise redirects to main.
+//Route to tahnk you page, only works if user has active , otherwise redirects to main.
 Route::get('/thankyou', function (Request $request) {
-    if (!$request->session()->exists('confirmed')) {
+    if (!$request->()->exists('confirmed')) {
         return redirect('/');
     } else {
-        //Flush Session not its over
-        session()->flush();
+        //Flush  not its over
+        ()->flush();
     }
     return view('thankyou');
 });
@@ -73,9 +73,9 @@ Route::get('/filesystem', function (Request $request) {
     return view('filesystem');
 })->middleware('auth')->name('filesystem');
 
-/* Route that prints session ID for debugging.
+/* Route that prints  ID for debugging.
 Route::get('/sid', function () {
-    $sid = session('sid');
+    $sid = ('sid');
     dd($sid);
 });
 */
@@ -86,7 +86,7 @@ Route::get('/generate-csv', function () {
     $csv = fopen('CSV-'.$dateTime.'.csv', 'w');
 
     //first line of titles
-    $headingsArray = array("id", "session-id", "age", "glasses", "gender", "deviceMobile", "Created At", "Updated At");
+    $headingsArray = array("id", "-id", "age", "glasses", "gender", "deviceMobile", "Created At", "Updated At");
     fputcsv($csv, $headingsArray);
     $testSql = 'select *  from demographics';
     //call database
@@ -141,10 +141,10 @@ Route::get('/resetfail', function(){
 
 //Route for logging out. Requires auth.
 Route::get('/logout', function(Request $request){
-    //Call logout, invalidate current session and redirect.
+    //Call logout, invalidate current  and redirect.
     Auth::logout();
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
+    $request->()->invalidate();
+    $request->()->regenerateToken();
     return redirect('/');
 })->middleware('auth');
 
@@ -152,7 +152,7 @@ Route::get('/logout', function(Request $request){
 /* This route creates a dummy entry in the databases for a fake file.
 Route::get('/dummyGenerator', function () {
     $sid = substr(hash('sha512', microtime() . 'amogus'), 0, 16);
-    session(['sid' => $sid]);
+    (['sid' => $sid]);
 
     $dateTime = date('Y-m-d H.i.s');
     $filename = $sid . " " . $dateTime;
@@ -185,9 +185,9 @@ Demographic::Create([
 
 //Route for posting new demographic information.
 Route::post('/post', function (Request $request) {
-    //Create SID for the session, hash of microtime with salt.
+    //Create SID for the , hash of microtime with salt.
     $sid = substr(hash('sha512', microtime() . 'amogus'), 0, 16);
-    session(['sid' => $sid]);
+    (['sid' => $sid]);
 
     //Create new demographic entry from model.
     Demographic::Create([

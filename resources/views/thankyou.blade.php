@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 
@@ -41,6 +42,10 @@
   opacity: 1;
 }
 
+.specific{
+    	background-color: #fff;
+    }
+
 </style>
 
 
@@ -57,41 +62,50 @@
     <link rel="icon" type="image/png" href="https://www.westernsydney.edu.au/__data/assets/file/0007/372562/WSU_Favicon-01.png?v=0.2.7"/>
 
     <title>Eye Tracking Study | Western Sydney University</title>
+	
+	 
+	<script src="https://superal.github.io/canvas2image/canvas2image.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+	
   </head>
   <body>
     <!-- Navbar -->
-<nav class="navbar navbar-expand-sm bg-light navbar-light">
-   <a class="navbar-brand" href="/">
-    <img src="{{ asset('wsu_logo-removebg-preview.png') }}" alt="tag" width="240px;">
-  </a>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-      </li>
-    </ul>
-  </div>
-</nav>
-<div class="container">
-<center>
-  <div class="jumbotron">
-    <img src="{{ asset('wsu_logo-removebg-preview.png') }}" srcset="wsu_logo-removebg-preview.png 900w" sizes="(min-width: 1200px) 50vw,100vw" alt="tag">
-  <h1 class="display-4" style="padding-top: 30px;"><b>Thank You!</b></h1>
-  <p class="lead">Make sure you have copied the following study code prior to close your browser window.</p><br>
+	<nav class="navbar navbar-expand-sm bg-light navbar-light">
+	   <a class="navbar-brand" href="/">
+		<img src="{{ asset('wsu_logo-removebg-preview.png') }}" alt="tag" width="240px;">
+	  </a>
+	  
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+		  <li class="nav-item">
+		  </li>
+		</ul>
+	  </div>
+	</nav>
+	<div class="specific">
+	<div class="container">
+		<center>
+			<div class="jumbotron">
+			<img src="{{ asset('wsu_logo-removebg-preview.png') }}" srcset="wsu_logo-removebg-preview.png 900w" sizes="(min-width: 1200px) 50vw,100vw" alt="tag">
+			<h1 class="display-4" style="padding-top: 30px;"><b>Thank You!</b></h1>
+			<p class="lead">Make sure you have copied the following study code prior to close your browser window.</p><br>
+			</div>
+			<br>
+			<input type="text" value="" id="hashcode" readonly>
+			<p></p>
+			<br>
+			<!-- The button used to copy the text -->
+		<button type="button" class="btn btn-outline-primary" onclick="copyfunction()">Copy study code</button>
+		  <button id="button" class="btn btn-outline-primary" onclick="takeScreenshot()">Take a Screenshot!</button>
+		</center>
 
-</center>
-</div>
-<div>
-<center>
-<input type="text" value="" id="hashcode" readonly>
-
-<!-- The button used to copy the text -->
-<button onclick="copyfunction()">Copy study code</button>
-    </center>
+	</div>
 	</div>
 
+
 	<script>
-	
-	document.getElementById("hashcode").value = "00000000000000";
+	var myID = localStorage.getItem("sessionId")
+	document.getElementById("hashcode").value = myID;
 	
 		function copyfunction() {
 	  /* Get the text field */
@@ -107,6 +121,17 @@
 	  /* Alert the copied text */
 	  alert("Copied the text: " + copyText.value);
 	}
+	
+	function takeScreenshot() {
+  html2canvas(document.querySelector('.specific'), {
+    onrendered: function(canvas) {
+      // document.body.appendChild(canvas);
+      return Canvas2Image.saveAsPNG(canvas);
+    }
+  });
+}
+	
+	
 
 </script>
 	

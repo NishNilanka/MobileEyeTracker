@@ -41,6 +41,8 @@
 <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#termsModal"><i class="fa fa-home"></i>
   Begin
 </button>
+<p></p>
+<p></p>
 </center>
 <!-- Modal -->
 <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
@@ -148,6 +150,7 @@ Any issues you raise will be treated in confidence and investigated fully, and y
                     </button>
                 </center>
                 </div>
+				<br>
         </form>
         </div>
       </div>

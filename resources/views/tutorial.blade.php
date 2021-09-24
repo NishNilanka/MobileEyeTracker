@@ -1,3 +1,4 @@
+<?php $session_value=session('sid') ?>
 <!doctype html>
 <html lang="en">
 <!-- CSS for Player -->
@@ -7,7 +8,11 @@
 
 	 
 	}
+	
+	* { margin:0; padding:0; }
 
+	html, body { width:100%; height:100%; }
+	
 	.video-view .video {
 	  position: absolute;
 	  width: 100%;
@@ -38,19 +43,32 @@
     }
 	
 	.canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  width: 400px;
-  height: 700px;
-  top: 0px; 
-  left: 0px;
- 
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  z-index: -1;
+	  top: 0px; 
+	  left: 0px;
+
+	  display:block;
+	 
+	}
+
+
+	div.userinfo
+	{
+		position:fixed; 
+		bottom: 0px; 
+		width: 100%;
+		z-index:100; 	
+	}
+	
+
+ol.o {
+
+list-style-type: upper-alpha;
+font-weight: bold;
 }
-
-ol.o {list-style-type: upper-alpha;}
-
 
 </style>
 
@@ -84,7 +102,7 @@ ol.o {list-style-type: upper-alpha;}
     </nav>
 	
 	<div class="video-view mw-100 mh-100" id="webcam">
-	<video id="video" muted autoplay="true" class="video"></video>
+	<video id="video" muted autoplay="true" class="video" onplay="resize_canvas(this)" playsinline autoplay muted loop></video>
 		<div class="video-content">
 			<div id="vidsource" class="col-xs-12 col-xs-offset-6 sticky-top">
 				<center>
@@ -143,7 +161,7 @@ ol.o {list-style-type: upper-alpha;}
 	</div>
 
 	 <!-- start Modal 2-->
-	 <div class="modal fade" id="beginModal2" tabindex="-1" aria-labelledby="beginModalLabel" aria-hidden="true">
+	 <div class="modal fade " id="beginModal2" tabindex="-1" aria-labelledby="beginModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -186,15 +204,14 @@ ol.o {list-style-type: upper-alpha;}
 				<div class="modal-body">
 					<p>You are requested to contribute three (3) videos in three (3) different positions:</p>
 					<ol class="o">
-						<li>First video - Standing Position</li>
+						<li>First video - Looking down at the device</li>
 						<br>
-						<li>Second Video - Sitting Position</li>
+						<li>Second Video - Looking directly at the device</li>
 						<br>
-						<li>Third Video - Lying down Position</strong></li>
-						<br>
-						
-						<img src="{{ asset('Position.png') }}" style="display: block; margin-left: auto; margin-right: auto;" srcset="Position.png 900w"  width="300" height="200"  alt="tag">
+						<li>Third Video - Looking upward at the device</li>
 					</ol>
+						<img src="{{ asset('position.jpg') }}" style="display: block; margin-left: auto; margin-right: auto;" srcset="position.jpg 900w"  width="300" height="200"  alt="tag">
+					
 
 				</div>
 				<div class="modal-footer">
@@ -215,7 +232,7 @@ ol.o {list-style-type: upper-alpha;}
                         <div class="modal-body">
 							<p>Pressing the "Begin" button will cause the recording to start immediately.</p>
                             <p>Make certain that you <strong id="positiontxt">stand</strong> during the recording and refrain from moving while it is being done.</p>
-							<img id="positionimg" src="{{ asset('standing.jpg') }}" style="display: block; margin-left: auto; margin-right: auto;" width="100" height="120"  alt="tag">
+							<img id="positionimg" src="{{ asset('Looking_Down.jpg') }}" style="display: block; margin-left: auto; margin-right: auto;" width="100" height="120"  alt="tag">
                         </div>
                         <div class="modal-footer">
                             <button id="btnStart" onclick="startRecorder();" type="button" data-bs-dismiss="modal" class="btn btn-lg btn-success">Begin</button>
@@ -252,7 +269,15 @@ ol.o {list-style-type: upper-alpha;}
 			<img src="loadingloop.gif" alt="Loading" style="width: 50%; height: auto; padding-top: 100px">
 		</div>
 		
-<body>
+		<div id="userCameraAlert" class="alert alert-warning" role="alert">
+		  Make Sure you have selected the front camera of your mobile device!
+		</div>
+		
+		<div id="userInfo" class="userinfo alert alert-info" role="alert">
+			Keep your face inside the ellipse as much as possible. While recording, make sure to keep your mobile device steady.
+		</div>
+		
+</body>
 
 
 <script>
@@ -267,7 +292,9 @@ ol.o {list-style-type: upper-alpha;}
 	var dy=7;
 	var mediaRecorder;
 	var vidCurrentPlayingNumber = 0;
+	var cameraFace = false;
 
+	
 	function toggleFullScreen() {
 	  if (!document.fullscreenElement) {
 
@@ -289,12 +316,28 @@ ol.o {list-style-type: upper-alpha;}
 	  }
 	}
 
+	function resize_canvas(element)
+	{
+	  var w = element.offsetWidth;
+	  var h = element.offsetHeight;
+	  var cv = document.getElementById("cv1");
+	  cv.width = w;
+	  cv.height =h;
+	  
+		var ctx = cv.getContext("2d")
+
+	ctx.beginPath();
+	ctx.strokeStyle = 'white';
+	ctx.setLineDash([5, 3]);
+	ctx.ellipse(w/2, h/2, w/3+w*0.1, h/3, 0, 0, 2 * Math.PI);
+	ctx.stroke();
+	}
 
 	const hdConstraints = {
 	  video: {width: {min: 1280}, height: {min: 720}}
 	};
 
-	navigator.mediaDevices.getUserMedia(hdConstraints).
+	navigator.mediaDevices.getUserMedia().
 	  then((stream) => {video.srcObject = stream});
 
 	const video = document.querySelector('video');
@@ -321,6 +364,7 @@ ol.o {list-style-type: upper-alpha;}
 	}
 
 	function getStream() {
+	
 	  if (window.stream) {
 		window.stream.getTracks().forEach(function(track) {
 		  track.stop();
@@ -336,26 +380,66 @@ ol.o {list-style-type: upper-alpha;}
 	  navigator.mediaDevices.getUserMedia(constraints).
 		then(gotStream).catch(handleError);
 	}
-
+	
+	
 	function gotStream(stream) {
 	  window.stream = stream; // make stream available to console
 	  videoElement.srcObject = stream;
+	  //videoElement.play();
+	  var btnelem = document.getElementById('beginbutton');
+	  	if (stream.getVideoTracks()[0].getSettings().facingMode == 'user')
+		{
+			cameraFace =  true;
+			$('#userCameraAlert').hide();
+			btnelem.disabled = false;
+			getCameraProperties();
+		}
+		else
+		{
+			cameraFace =  false;
+			$('#userCameraAlert').show();
+			console.log(cameraFace);
+			btnelem.disabled = true;
+		}
+	}
+	
+	function getCameraProperties()
+	{
+		var fps = stream.getVideoTracks()[0].getSettings().frameRate;
+		var height = stream.getVideoTracks()[0].getSettings().height;
+		var width = stream.getVideoTracks()[0].getSettings().width;
+		var aspect = stream.getVideoTracks()[0].getSettings().aspectRatio;
+		console.log("FPS - " + fps);
+		console.log("height - " + height);
+		console.log("width - " + width);
+		console.log("Aspect - " + aspect);
 	}
 
 	function handleError(error) {
 	  console.error('Error: ', error);
 	}
+	
+	var alpha;
+	var beta;
+	var gamma;
+	window.addEventListener('deviceorientation', function(event) {
+
+	alpha = event.alpha;
+	beta = event.beta;
+	gamma = event.gamma;
+
+	}, false);
 
 	window.onload=function(){
-		var canvas = document.getElementById("cv1");
+		var myvar='<?php echo $session_value;?>';
+		localStorage.setItem("sessionId",myvar);
+		
+		//Draw circle
 		vidCanvas = document.getElementById("myCanvas");
 		var Video_two = document.getElementsByClassName('video')[0];
-		var ctx = canvas.getContext("2d")
-		ctx.beginPath();
-		ctx.strokeStyle = 'white';
-		ctx.setLineDash([5, 3]);
-		ctx.ellipse(150, 80, 120, 45, 0, 0, 2 * Math.PI);
-		ctx.stroke();
+		
+		$('#userInfo').show();
+
 	}; 
 
 	
@@ -391,10 +475,10 @@ ol.o {list-style-type: upper-alpha;}
 		mediaRecorder = null;
 		if(vidCurrentPlayingNumber == 1){
 			document.getElementById("positiontxt").innerHTML = "Sit";
-			document.getElementById("positionimg").src = "{{ asset('siting.jpg') }}";
+			document.getElementById("positionimg").src = "{{ asset('Looking_Straight.jpg') }}";
 		} else if(vidCurrentPlayingNumber==2){
 			document.getElementById("positiontxt").innerHTML = "Lie Down";
-			document.getElementById("positionimg").src = "{{ asset('lying.jpg') }}";
+			document.getElementById("positionimg").src = "{{ asset('LookingUp.jpg') }}";
 		}
 	}
 	
@@ -403,9 +487,9 @@ ol.o {list-style-type: upper-alpha;}
 		var constraintObj = {
 			audio: false,
 			video: {
-				deviceId: videoSource,
-				width: { min: 480, ideal: 720, max: 1080 },
-				height: { min: 640, ideal: 1280, max: 1920 }
+				deviceId: videoSource
+			//	width: { min: 480, ideal: 720, max: 1080 },
+				//height: { min: 640, ideal: 1280, max: 1920 }
 			}
 		};
 		var options = {
@@ -494,6 +578,9 @@ ol.o {list-style-type: upper-alpha;}
 	  context.arc(x,y,20,0,Math.PI*2,true);
 	  context.closePath();
 	  context.fill();
+		console.log(alpha);
+		console.log(beta);
+		console.log(gamma);
 	  let max_width = width-20;
 	  let max_height = height-20;
 	  // Boundary Logic
