@@ -155,7 +155,10 @@
                         </div>
                     </div>
                 <!-- forum input -->
-                <input type="hidden" id="MoblileOrTablet" name="MoblileOrTablet" value="Troys a Failure">
+                <input type="hidden" id="MoblileOrTablet" name="MoblileOrTablet" value="Value">
+                <input type="hidden" id="DeviceBrand" name="DeviceBrand" value="brand">
+                <input type="hidden" id="DeviceModel" name="DeviceModel" value="model">
+                <input type="hidden" id="userAgent" name="userAgent" value="userAgent">
             </form>
         </div>
 		

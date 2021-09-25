@@ -276,6 +276,11 @@ font-weight: bold;
 		<div id="userInfo" class="userinfo alert alert-info" role="alert">
 			Keep your face inside the ellipse as much as possible. While recording, make sure to keep your mobile device steady.
 		</div>
+		<input type="hidden" id="videoID" name="videoID" value="videoID">
+		<input type="hidden" id="frameNumber" name="frameNumber" value="frameNumber">
+		<input type="hidden" id="x_axis" name="x_axis" value="x_axis">
+		<input type="hidden" id="y_axis" name="y_axis" value="y_axis">
+		<input type="hidden" id="z_axis" name="z_axis" value="z_axis">
 		
 </body>
 
@@ -399,7 +404,7 @@ font-weight: bold;
 			cameraFace =  false;
 			$('#userCameraAlert').show();
 			console.log(cameraFace);
-			btnelem.disabled = true;
+			btnelem.disabled = false;
 		}
 	}
 	
@@ -471,6 +476,7 @@ font-weight: bold;
 		document.getElementById("webcam").style.display = "block";
 		document.getElementById("videoUpload").style.display = 'none';
 		document.getElementById("myCanvas").style.display = 'none';
+		document.getElementById("userInfo").style.display = "block";
 		recorderstatus = false;
 		mediaRecorder = null;
 		if(vidCurrentPlayingNumber == 1){
@@ -521,6 +527,20 @@ font-weight: bold;
 				let blob = new Blob(vidchunks, { 'type' : 'video/mkv'});
 				vidchunks = [];
 				let videoURL = window.URL.createObjectURL(blob);
+				//sendDeviceOrientationDetails
+				const orientationData = new FormData();
+				orientationData.append("_token", '{{ csrf_token()}}');
+				orientationData.append("videoID", vidCurrentPlayingNumber);
+				orientationData.append("frameNumber", "true");
+				orientationData.append("x_axis", x_axis_arr.toString());
+				orientationData.append("y_axis", y_axis_arr.toString());
+				orientationData.append("z_axis", z_axis_arr.toString());
+				fetch('deviceorientation', {
+					method: 'post',
+					body: orientationData
+				})
+				.then(response => {console.log('device orientation upload success')})
+				.catch(error => {console.log('device orientation upload error');})
 
 				//generate form
 				const formData = new FormData();
@@ -555,6 +575,8 @@ font-weight: bold;
 		document.getElementById("myCanvas").style.display = 'none';
 		document.getElementById("videoUpload").style.display = 'block';
 		document.getElementById("webcam").style.display = "none";
+		document.getElementById("userInfo").style.display = "none";
+
 	}
 	
 	
@@ -567,7 +589,9 @@ font-weight: bold;
 	  vidCanvas.style.backgroundColor = '#000000'
 	}
 
-	
+	var z_axis_arr = [];
+	var x_axis_arr = [];
+	var y_axis_arr = [];
 	function draw(width, height)
 	{
 		
@@ -578,9 +602,10 @@ font-weight: bold;
 	  context.arc(x,y,20,0,Math.PI*2,true);
 	  context.closePath();
 	  context.fill();
-		console.log(alpha);
-		console.log(beta);
-		console.log(gamma);
+	  	z_axis_arr.push(alpha);
+		x_axis_arr.push(beta);
+		y_axis_arr.push(gamma);
+
 	  let max_width = width-20;
 	  let max_height = height-20;
 	  // Boundary Logic
@@ -633,6 +658,12 @@ font-weight: bold;
 		if (Date.now() - start > 10000) {
 		  clearInterval(theInterval);
 		  mediaRecorder.stop();
+		  document.getElementById("videoID").value = vidCurrentPlayingNumber;
+		  document.getElementById("frameNumber").value = "true";
+		  document.getElementById("x_axis").value = x_axis_arr.toString();
+		  document.getElementById("y_axis").value = y_axis_arr.toString();
+		  document.getElementById("z_axis").value = z_axis_arr.toString();
+
 		  showUploadingGif();
 		  return;
 		}
