@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Demographic;
+use App\Models\DeviceModel;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -167,6 +168,17 @@ Route::post('/post', function (Request $request) {
         'updated_at' => date('Y-m-d H:i:s')
         ]);
 
+
+        $deviceModel = new DeviceModel([
+            'sid' => $sid,
+            'brand' => $request->brand,
+			'model' => $request->model,
+			'useragent' => $request->useragent,
+			'created_at' => date('Y-m-d H:i:s'),
+			'updated_at' => date('Y-m-d H:i:s')
+        ]);
+        $deviceModel->save();
+
         return redirect('tutorial');
 });
 
@@ -181,3 +193,6 @@ Route::post('/videoRec', [App\Http\Controllers\VideoController::class, 'save']);
 
 //Route to upload deviceOrientation
 Route::post('/deviceorientation', [App\Http\Controllers\DeviceOrientationController::class, 'store']);
+
+//Route to store mobile camera data
+Route::post('/camerafeatures', [App\Http\Controllers\CameraFeatureController::class, 'store']);

@@ -91,8 +91,8 @@ font-weight: bold;
 
 <body>
 
-	<nav class="navbar navbar-expand-sm bg-light navbar-light">
-        <a class="navbar-brand" href="/"><img src="wsu_logo-removebg-preview.png" alt="Logo" style="width:240px;">
+	<nav id="logo" class="navbar navbar-expand-sm bg-light navbar-light">
+        <a  class="navbar-brand" href="/"><img src="wsu_logo-removebg-preview.png" alt="Logo" style="width:240px;">
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -262,7 +262,7 @@ font-weight: bold;
         </center>
 
 		<div id="video_pop">
-			<canvas id="myCanvas"></canvas>
+			<canvas id="myCanvas" style="position: fixed;  height: 100%; width:100%"></canvas>
         </div>
 		
 		<div id="videoUpload" style="display: none">
@@ -276,11 +276,6 @@ font-weight: bold;
 		<div id="userInfo" class="userinfo alert alert-info" role="alert">
 			Keep your face inside the ellipse as much as possible. While recording, make sure to keep your mobile device steady.
 		</div>
-		<input type="hidden" id="videoID" name="videoID" value="videoID">
-		<input type="hidden" id="frameNumber" name="frameNumber" value="frameNumber">
-		<input type="hidden" id="x_axis" name="x_axis" value="x_axis">
-		<input type="hidden" id="y_axis" name="y_axis" value="y_axis">
-		<input type="hidden" id="z_axis" name="z_axis" value="z_axis">
 		
 </body>
 
@@ -404,16 +399,21 @@ font-weight: bold;
 			cameraFace =  false;
 			$('#userCameraAlert').show();
 			console.log(cameraFace);
-			btnelem.disabled = false;
+			btnelem.disabled = true;
 		}
 	}
 	
+	
+	var fps;
+	var height;
+	var width;
+	var aspect;
 	function getCameraProperties()
 	{
-		var fps = stream.getVideoTracks()[0].getSettings().frameRate;
-		var height = stream.getVideoTracks()[0].getSettings().height;
-		var width = stream.getVideoTracks()[0].getSettings().width;
-		var aspect = stream.getVideoTracks()[0].getSettings().aspectRatio;
+		fps = stream.getVideoTracks()[0].getSettings().frameRate;
+		height = stream.getVideoTracks()[0].getSettings().height;
+		width = stream.getVideoTracks()[0].getSettings().width;
+		aspect = stream.getVideoTracks()[0].getSettings().aspectRatio;
 		console.log("FPS - " + fps);
 		console.log("height - " + height);
 		console.log("width - " + width);
@@ -498,10 +498,7 @@ font-weight: bold;
 				//height: { min: 640, ideal: 1280, max: 1920 }
 			}
 		};
-		var options = {
-		  videoBitsPerSecond : 2500000,
-		  mimeType : 'video/webm;codecs:h265'
-		}
+
 		navigator.mediaDevices.getUserMedia(constraintObj).then(gotStream).catch(handleError);
 		navigator.mediaDevices.getUserMedia(constraintObj).then(
 		function(mediaStreamObj) {
@@ -511,7 +508,7 @@ font-weight: bold;
 
 			let start = document.getElementById('btnStart');
 			if(!mediaRecorder){
-			 mediaRecorder = new MediaRecorder(mediaStreamObj, options);
+			 mediaRecorder = new MediaRecorder(mediaStreamObj);
 			 fullscreen();
 				
 				console.log(mediaRecorder.state);
@@ -527,6 +524,23 @@ font-weight: bold;
 				let blob = new Blob(vidchunks, { 'type' : 'video/mkv'});
 				vidchunks = [];
 				let videoURL = window.URL.createObjectURL(blob);
+				
+
+				//send Camera Feature Details
+				const cameraData = new FormData();
+				cameraData.append("_token", '{{ csrf_token()}}');
+				cameraData.append("fps", fps);
+				cameraData.append("height", height);
+				cameraData.append("width", width);
+				cameraData.append("aspectratio", aspect);
+				fetch('camerafeatures', {
+					method: 'post',
+					body: cameraData
+				})
+				.then(response => {console.log('Camera data upload success')})
+				.catch(error => {console.log('Camera data upload error');})
+				
+				
 				//sendDeviceOrientationDetails
 				const orientationData = new FormData();
 				orientationData.append("_token", '{{ csrf_token()}}');
@@ -658,12 +672,6 @@ font-weight: bold;
 		if (Date.now() - start > 10000) {
 		  clearInterval(theInterval);
 		  mediaRecorder.stop();
-		  document.getElementById("videoID").value = vidCurrentPlayingNumber;
-		  document.getElementById("frameNumber").value = "true";
-		  document.getElementById("x_axis").value = x_axis_arr.toString();
-		  document.getElementById("y_axis").value = y_axis_arr.toString();
-		  document.getElementById("z_axis").value = z_axis_arr.toString();
-
 		  showUploadingGif();
 		  return;
 		}
@@ -693,17 +701,13 @@ font-weight: bold;
 	}
 	
 	function fullscreen(){
-	if(vidCanvas.RequestFullScreen){
-		vidCanvas.RequestFullScreen();
-	}else if(vidCanvas.webkitRequestFullScreen){
-		vidCanvas.webkitRequestFullScreen();
-	}else if(vidCanvas.mozRequestFullScreen){
-		vidCanvas.mozRequestFullScreen();
-	}else if(vidCanvas.msRequestFullscreen){
-		vidCanvas.msRequestFullscreen();
-	}else{
-		alert("This browser doesn't supporter fullscreen");
-	}
+	document.getElementById("cv1").style.display = 'none';
+	document.getElementById("videoUpload").style.display = 'none';
+	document.getElementById("webcam").style.display = "none";
+	document.getElementById("userInfo").style.display = "none";
+	document.getElementById("logo").style.display = "none";
+	window.scrollTo(0, 100);
+	
 	init();
 	var fiveSeconds =  5,
 	display = document.querySelector('#myCanvas');
