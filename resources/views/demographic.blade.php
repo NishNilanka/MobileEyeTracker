@@ -196,8 +196,8 @@
 	document.getElementById("useragent").value = navigator.userAgent;
 	if(mobileOrTablet == 0)
 	{
-		var OptModal = new bootstrap.Modal(document.getElementById('OptModal'), {});
-		OptModal.show();
+		//var OptModal = new bootstrap.Modal(document.getElementById('OptModal'), {});
+		//OptModal.show();
 	}
 	};
 
@@ -229,13 +229,7 @@ function loadDeviceModels(selectObject)
 
 function enableButton()
 {
-    var selectedgender = document.getElementById('genderInput');
-    var selectedglasses = document.getElementById('glassesInput');
-    var selectedage = document.getElementById('ageInput');
-    var selectbrand = document.getElementById('brand');
-    var selectmodel = document.getElementById('model');
-    var btnelem = document.getElementById('SubmitBtn');
-    btnelem.disabled = !mobileOrTablet || !selectedgender.value || !selectedglasses.value || !selectedage.value || !selectbrand.value || !selectmodel.value;
+
 }
 
 function removeOptions(selectElement) {

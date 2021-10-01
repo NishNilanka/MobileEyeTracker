@@ -194,5 +194,9 @@ Route::post('/videoRec', [App\Http\Controllers\VideoController::class, 'save']);
 //Route to upload deviceOrientation
 Route::post('/deviceorientation', [App\Http\Controllers\DeviceOrientationController::class, 'store']);
 
+
+//Route to upload coordinates
+Route::post('/coordinates', [App\Http\Controllers\CoordinatesController::class, 'store']);
+
 //Route to store mobile camera data
 Route::post('/camerafeatures', [App\Http\Controllers\CameraFeatureController::class, 'store']);

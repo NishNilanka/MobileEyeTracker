@@ -143,9 +143,9 @@ font-weight: bold;
 						<br>
 						<li>We need your support to develop a eye-tracking algorithm on video type content with the use of a mobile device front-facing camera.</li>
 						<br>
-						<li>During the study, you have to look at a moving object on the screen and your face will be captured from the front-facing camera of your mobile device.</li>
+						<li>During the study, you have to look at a moving circle on the screen and your face will be captured from the front-facing camera of your mobile device.</li>
 						<br>
-						<li>You are requested to contribute three (3) videos in three (3) different positions(standing, sitting, and lying down)</li>
+						<li>You are requested to contribute three (3) videos by keeping the mobile device in three (3) different positions</li>
 						<br>
 						<li>Throughout the study, hold the device vertically, positioning the camera at the top of the device</li>
 						<br>
@@ -180,7 +180,7 @@ font-weight: bold;
 						<li>There is no light reflections on your glasses.</li>
 						<br>
 						
-						<img src="{{ asset('Capturing1.jpg') }}" style="display: block; margin-left: auto; margin-right: auto;" srcset="Capturing1.jpg 900w"  width="100" height="100"  alt="tag">
+						<img src="{{ asset('Capturing1.jpg') }}" style="display: block; margin-left: auto; margin-right: auto;" srcset="Capturing1.jpg 900w"  width="120" height="120"  alt="tag">
 					</ul>
 
 				</div>
@@ -202,27 +202,50 @@ font-weight: bold;
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<p>You are requested to contribute three (3) videos in three (3) different positions:</p>
+					<p>You are requested to contribute three (3) videos by keeping the mobile device in three (3) different positions:</p>
 					<ol class="o">
-						<li>First video - Looking down at the device</li>
+						<li>First video - Keep your mobile device below the eye level (Looking down)</li>
 						<br>
-						<li>Second Video - Looking directly at the device</li>
+						<li>Second Video - Keep your mobile device as same as the eye level (Looking straight)</li>
 						<br>
-						<li>Third Video - Looking upward at the device</li>
+						<li>Third Video - Keep your mobile device above the eye level (Looking up)</li>
 					</ol>
 						<img src="{{ asset('position.jpg') }}" style="display: block; margin-left: auto; margin-right: auto;" srcset="position.jpg 900w"  width="300" height="200"  alt="tag">
 					
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" data-bs-dismiss="modal" class="btn btn-lg btn-success"> Continue</button>
+					<button type="button" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#OptModal" class="btn btn-lg btn-success"> Next</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	
+	 <!-- Record again optional Modal -->
+            <div class="modal fade" id="OptModal" tabindex="-1" aria-labelledby="optLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="OptModalLable">Start Recording</h5>
+                            <!--<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                        </div>
+                        <div class="modal-body">
+                            <p id="msgText" style="display: none;">To record in the next position, Press the "Continue" Button.</p><br>
+							<p id="devicepos">Make certain that you <strong id="positiontxt">are looking down at the device</strong> during the recording and refrain from moving while it is being done.</p>
+							<img id="positionimg" src="{{ asset('Looking_Down.jpg') }}" style="display: block; margin-left: auto; margin-right: auto;" width="100" height="120"  alt="tag">
+                        </div>
+                        <div class="modal-footer">
+                            <button id="finishbtn" type="button" data-bs-dismiss="modal" class="btn btn-lg btn-primary" style="display: none;">Finish</button>  
+                            <button id="againbtn" onclick="startAgain();" type="button" data-bs-dismiss="modal" class="btn btn-lg btn-primary">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </center>
+
+	
 	<!-- Confirmation Modal -->
-            <div class="modal fade" id="ConfModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="ConfModalLabel" aria-hidden="true">
+            <div class="modal fade" id="ConfModal"  data-keyboard="false" data-backdrop="static">
                 <div class="modal-dialog modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -231,8 +254,7 @@ font-weight: bold;
                         </div>
                         <div class="modal-body">
 							<p>Pressing the "Begin" button will cause the recording to start immediately.</p>
-                            <p>Make certain that you <strong id="positiontxt">stand</strong> during the recording and refrain from moving while it is being done.</p>
-							<img id="positionimg" src="{{ asset('Looking_Down.jpg') }}" style="display: block; margin-left: auto; margin-right: auto;" width="100" height="120"  alt="tag">
+                            
                         </div>
                         <div class="modal-footer">
                             <button id="btnStart" onclick="startRecorder();" type="button" data-bs-dismiss="modal" class="btn btn-lg btn-success">Begin</button>
@@ -241,25 +263,7 @@ font-weight: bold;
                 </div>
             </div>
 
-            <!-- Record again optional Modal -->
-            <div class="modal fade" id="OptModal" tabindex="-1" aria-labelledby="optLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="beginModalLabel">Video Successfully Uploaded</h5>
-                            <!--<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-                        </div>
-                        <div class="modal-body">
-                            <p id="msgText">To record another video, Press the "Record Next" Button.</p><br>
-                        </div>
-                        <div class="modal-footer">
-                            <button id="finishbtn" type="button" data-bs-dismiss="modal" class="btn btn-lg btn-primary">Finish</button>  
-                            <button id="againbtn" onclick="startAgain();" type="button" data-bs-dismiss="modal" class="btn btn-lg btn-primary">Record Next</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </center>
+           
 
 		<div id="video_pop">
 			<canvas id="myCanvas" style="position: fixed;  height: 100%; width:100%"></canvas>
@@ -337,8 +341,8 @@ font-weight: bold;
 	  video: {width: {min: 1280}, height: {min: 720}}
 	};
 
-	navigator.mediaDevices.getUserMedia().
-	  then((stream) => {video.srcObject = stream});
+	navigator.mediaDevices.getUserMedia({video: true}).
+	  then((stream) => {video.srcObject = stream}).catch(handleError);;
 
 	const video = document.querySelector('video');
 
@@ -438,6 +442,7 @@ font-weight: bold;
 	window.onload=function(){
 		var myvar='<?php echo $session_value;?>';
 		localStorage.setItem("sessionId",myvar);
+		localStorage.setItem("vidCurrentPlayingNumber",0);
 		
 		//Draw circle
 		vidCanvas = document.getElementById("myCanvas");
@@ -463,7 +468,7 @@ font-weight: bold;
 			var ConfModal = new bootstrap.Modal(document.getElementById('ConfModal'), {});
 			ConfModal.show();
 		}
-		recorderstatus = true;
+
 	});
 
 	document.addEventListener('DOMContentLoaded', (ev)=>{
@@ -476,26 +481,28 @@ font-weight: bold;
 		document.getElementById("webcam").style.display = "block";
 		document.getElementById("videoUpload").style.display = 'none';
 		document.getElementById("myCanvas").style.display = 'none';
+		document.getElementById("cv1").style.display = 'block';
 		document.getElementById("userInfo").style.display = "block";
 		recorderstatus = false;
 		mediaRecorder = null;
-		if(vidCurrentPlayingNumber == 1){
-			document.getElementById("positiontxt").innerHTML = "Sit";
+		if(localStorage.getItem("vidCurrentPlayingNumber") == 0){
+			document.getElementById("positiontxt").innerHTML = "Looking straight at the device";
 			document.getElementById("positionimg").src = "{{ asset('Looking_Straight.jpg') }}";
-		} else if(vidCurrentPlayingNumber==2){
-			document.getElementById("positiontxt").innerHTML = "Lie Down";
+		} else if(localStorage.getItem("vidCurrentPlayingNumber")==1){
+			document.getElementById("positiontxt").innerHTML = "Looking up at the device";
 			document.getElementById("positionimg").src = "{{ asset('LookingUp.jpg') }}";
 		}
 	}
 	
 	function startRecorder() {
 		videoSource = videoSelect.value;
+		recorderstatus = true;
 		var constraintObj = {
 			audio: false,
 			video: {
 				deviceId: videoSource
 			//	width: { min: 480, ideal: 720, max: 1080 },
-				//height: { min: 640, ideal: 1280, max: 1920 }
+				//height: { min: 640, ideal: 1280,max: 1920 }
 			}
 		};
 
@@ -521,7 +528,7 @@ font-weight: bold;
 
 			var timerId;
 			mediaRecorder.onstop = (ev)=>{
-				let blob = new Blob(vidchunks, { 'type' : 'video/mkv'});
+				let blob = new Blob(vidchunks, { 'type' : 'video/mp4'});
 				vidchunks = [];
 				let videoURL = window.URL.createObjectURL(blob);
 				
@@ -540,11 +547,24 @@ font-weight: bold;
 				.then(response => {console.log('Camera data upload success')})
 				.catch(error => {console.log('Camera data upload error');})
 				
+				//SendCoordinates
+				const coordinatesData = new FormData();
+				coordinatesData.append("_token", '{{ csrf_token()}}');
+				coordinatesData.append("videoID", localStorage.getItem("vidCurrentPlayingNumber"));
+				coordinatesData.append("x_coordinates", x_coordinates_arr.toString());
+				coordinatesData.append("y_coordinates", y_coordinates_arr.toString());
+				fetch('coordinates', {
+					method: 'post',
+					body: coordinatesData
+				})
+				.then(response => {console.log('Coordinates upload success')})
+				.catch(error => {console.log('Coordinates upload error');})
+				
 				
 				//sendDeviceOrientationDetails
 				const orientationData = new FormData();
 				orientationData.append("_token", '{{ csrf_token()}}');
-				orientationData.append("videoID", vidCurrentPlayingNumber);
+				orientationData.append("videoID", localStorage.getItem("vidCurrentPlayingNumber"));
 				orientationData.append("frameNumber", "true");
 				orientationData.append("x_axis", x_axis_arr.toString());
 				orientationData.append("y_axis", y_axis_arr.toString());
@@ -567,12 +587,18 @@ font-weight: bold;
 				.then(response => {console.log('upload success');
 				clearInterval(timerId);
 				var OptModal = new bootstrap.Modal(document.getElementById('OptModal'), {});
-				if(vidCurrentPlayingNumber >= 3){
+				if(localStorage.getItem("vidCurrentPlayingNumber") >= 3){
 					document.getElementById("finishbtn").style.display="block";
 					document.getElementById("againbtn").style.display="none";
+					document.getElementById("devicepos").style.display="none";
+					document.getElementById("positionimg").style.display="none";
+					document.getElementById("OptModalLable").innerHTML = "We thank you for your participation.";
 					document.getElementById("msgText").innerHTML = "You've completed all three recording sessions successfully. After clicking \"Finish,\" you will move on to the next page. <br><br>Before you close the browser window, be sure to copy the study code found in the next page.";
-					document.getElementById("beginModalLabel").innerHTML = "We thank you for your participation.";
+
+					
+		
 				}else{
+					document.getElementById("msgText").style.display="block";
 					document.getElementById("finishbtn").style.display="none";
 					document.getElementById("againbtn").style.display="block";
 				}
@@ -606,6 +632,8 @@ font-weight: bold;
 	var z_axis_arr = [];
 	var x_axis_arr = [];
 	var y_axis_arr = [];
+	var x_coordinates_arr = [];
+	var y_coordinates_arr = [];
 	function draw(width, height)
 	{
 		
@@ -613,10 +641,12 @@ font-weight: bold;
 	  context.beginPath();
 	  
 	  // Draws a circle of radius 20 at the coordinates 100,100 on the canvas
+	  x_coordinates_arr.push(x);
+	  y_coordinates_arr.push(y);
 	  context.arc(x,y,20,0,Math.PI*2,true);
 	  context.closePath();
 	  context.fill();
-	  	z_axis_arr.push(alpha);
+		z_axis_arr.push(alpha);
 		x_axis_arr.push(beta);
 		y_axis_arr.push(gamma);
 
@@ -653,14 +683,16 @@ font-weight: bold;
 
 	function stopTimer(width,height)
 	{
-		vidCurrentPlayingNumber++;
-		if(vidCurrentPlayingNumber == 1){
+		var temp = localStorage.getItem("vidCurrentPlayingNumber");
+		temp++;
+		localStorage.setItem("vidCurrentPlayingNumber", temp)
+		if(localStorage.getItem("vidCurrentPlayingNumber") == 1){
 			context.fillStyle="#ff0000";
 		}
-		else if(vidCurrentPlayingNumber == 2){
+		else if(localStorage.getItem("vidCurrentPlayingNumber") == 2){
 			context.fillStyle="#00ff00";
 		}
-		else if(vidCurrentPlayingNumber == 3){
+		else if(localStorage.getItem("vidCurrentPlayingNumber") == 3){
 			context.fillStyle="#0000ff";
 		}
 		mediaRecorder.start();
@@ -669,7 +701,7 @@ font-weight: bold;
 		vidCanvas.style.display="block"
 		vidCanvas.style.backgroundColor = '#ffffff'
 		var theInterval = setInterval(function() {
-		if (Date.now() - start > 10000) {
+		if (Date.now() - start > 15000) {
 		  clearInterval(theInterval);
 		  mediaRecorder.stop();
 		  showUploadingGif();
