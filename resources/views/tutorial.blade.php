@@ -70,6 +70,31 @@ list-style-type: upper-alpha;
 font-weight: bold;
 }
 
+div.ball {
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	position:fixed;
+    
+}
+
+
+#container {
+  display: grid;
+  grid-template-rows: repeat(var(--grid-rows), 1fr);
+  grid-template-columns: repeat(var(--grid-cols), 1fr);
+bottom: 0px; 
+top:0px;
+height: 100%
+		width: 100%;
+position:fixed; 
+}
+
+
+.grid-item {
+  border: 0.5px solid #ddd;
+}
+
 </style>
 
 
@@ -84,7 +109,7 @@ font-weight: bold;
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- WSU favicon -->
-    <link rel="icon" type="image/png" href="https://www.westernsydney.edu.au/__data/assets/file/0007/372562/WSU_Favicon-01.png?v=0.2.7"/>
+    <link rel="icon" type="image/png" href="https://www.westernsydney.edu.au/__data/assets/file/0007/372562/favicon.ico"/>
 
     <title>Eye Tracking Study | Western Sydney University</title>
 </head>
@@ -230,7 +255,8 @@ font-weight: bold;
                             <!--<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                         </div>
                         <div class="modal-body">
-                            <p id="msgText" style="display: none;">To record in the next position, Press the "Continue" Button.</p><br>
+							<p id="successUpload" style="display: none;">Video successfully uploaded.</p>
+                            <p id="msgText" style="display: none;">To record in the next position, Press the "Continue" Button.</p>
 							<p id="devicepos">Make certain that you <strong id="positiontxt">are looking down at the device</strong> during the recording and refrain from moving while it is being done.</p>
 							<img id="positionimg" src="{{ asset('Looking_Down.jpg') }}" style="display: block; margin-left: auto; margin-right: auto;" width="100" height="120"  alt="tag">
                         </div>
@@ -266,8 +292,10 @@ font-weight: bold;
            
 
 		<div id="video_pop">
-			<canvas id="myCanvas" style="position: fixed;  height: 100%; width:100%"></canvas>
+			<canvas id="myCanvas" style="position: fixed"></canvas>
         </div>
+		
+		<!--<div class='ball' id='ball' style="display: none"></div>-->
 		
 		<div id="videoUpload" style="display: none">
 			<img src="loadingloop.gif" alt="Loading" style="width: 50%; height: auto; padding-top: 100px">
@@ -281,6 +309,8 @@ font-weight: bold;
 			Keep your face inside the ellipse as much as possible. While recording, make sure to keep your mobile device steady.
 		</div>
 		
+		<div id="container"></div>
+		
 </body>
 
 
@@ -290,10 +320,10 @@ font-weight: bold;
     var recorderstatus = false;
 	var vidCanvas;
 	var context;
-	var x=100;
-	var y=200;
-	var dx=7;
-	var dy=7;
+	var x=0.05;
+	var y=0.05;
+	var dx=5.00;
+	var dy=5.00;
 	var mediaRecorder;
 	var vidCurrentPlayingNumber = 0;
 	var cameraFace = false;
@@ -337,6 +367,7 @@ font-weight: bold;
 	ctx.stroke();
 	}
 
+	//makeRows(8, 3);
 	const hdConstraints = {
 	  video: {width: {min: 1280}, height: {min: 720}}
 	};
@@ -415,13 +446,16 @@ font-weight: bold;
 	function getCameraProperties()
 	{
 		fps = stream.getVideoTracks()[0].getSettings().frameRate;
-		height = stream.getVideoTracks()[0].getSettings().height;
-		width = stream.getVideoTracks()[0].getSettings().width;
-		aspect = stream.getVideoTracks()[0].getSettings().aspectRatio;
-		console.log("FPS - " + fps);
-		console.log("height - " + height);
-		console.log("width - " + width);
-		console.log("Aspect - " + aspect);
+		var video_Source = document.getElementById("video");
+		//height = stream.getVideoTracks()[0].getSettings().height;
+		//width = stream.getVideoTracks()[0].getSettings().width;
+		//aspect = stream.getVideoTracks()[0].getSettings().aspectRatio;
+		video_Source.addEventListener("playing", () => {
+        height = video_Source.videoHeight;
+		width = video_Source.videoWidth;
+		aspect = width/height;
+
+      });
 	}
 
 	function handleError(error) {
@@ -532,6 +566,10 @@ font-weight: bold;
 				vidchunks = [];
 				let videoURL = window.URL.createObjectURL(blob);
 				
+				console.log("FPS - " + fps);
+				console.log("height - " + height);
+				console.log("width - " + width);
+				console.log("Aspect - " + aspect);
 
 				//send Camera Feature Details
 				const cameraData = new FormData();
@@ -589,16 +627,18 @@ font-weight: bold;
 				var OptModal = new bootstrap.Modal(document.getElementById('OptModal'), {});
 				if(localStorage.getItem("vidCurrentPlayingNumber") >= 3){
 					document.getElementById("finishbtn").style.display="block";
+					document.getElementById("successUpload").style.display="block";
 					document.getElementById("againbtn").style.display="none";
 					document.getElementById("devicepos").style.display="none";
 					document.getElementById("positionimg").style.display="none";
 					document.getElementById("OptModalLable").innerHTML = "We thank you for your participation.";
 					document.getElementById("msgText").innerHTML = "You've completed all three recording sessions successfully. After clicking \"Finish,\" you will move on to the next page. <br><br>Before you close the browser window, be sure to copy the study code found in the next page.";
-
+					
 					
 		
 				}else{
 					document.getElementById("msgText").style.display="block";
+					document.getElementById("successUpload").style.display="block";
 					document.getElementById("finishbtn").style.display="none";
 					document.getElementById("againbtn").style.display="block";
 				}
@@ -634,31 +674,150 @@ font-weight: bold;
 	var y_axis_arr = [];
 	var x_coordinates_arr = [];
 	var y_coordinates_arr = [];
+	var index = 0;
+	var pos = 0;
+	var steps = 0;
+	var x_pos1 = [0.5082762416, 0.8534324145, 0.8534324145, 0.1895345021, 0.1681762416, 0.5056484851, 0.8856965472, 0.5056484851];
+	var y_pos1 = [0.9245348868, 0.9445348868, 0.0895345021, 0.5082762416, 0.9445348868, 0.5056484851, 0.3095345021, 0.0845345021];
+	var count_pos1 = [70, 30, 70, 50, 40, 60, 40, 40 ];
+	
+	var x_pos2 = [0.0812762416, 0.9434324145, 0.1134324145, 0.1195345021, 0.9081762416, 0.9056484851, 0.5756965472, 0.5556484851, 0.9355648485, 0.5021544874];
+	var y_pos2 = [0.0755348868, 0.0755348868, 0.5095345021, 0.9482762416, 0.5045348868, 0.9456484851, 0.9456484851, 0.5089545021, 0.2555648485, 0.0856987413];
+	var count_pos2 = [50, 40, 60, 40, 40, 50, 20, 50, 30, 20 ];
+	
+	var x_pos3 = [0.0812762416, 0.3556484851, 0.0734324145, 0.9081762416, 0.8150324145, 0.5056484851, 0.3756965472, 0.9156484851];
+	var y_pos3 = [0.9245348868, 0.5089545021, 0.2895345021, 0.0834324145, 0.9034324145, 0.0756484851, 0.8250345021, 0.9256484851];
+	var count_pos3 = [40, 40, 40, 40, 70, 60, 70, 40 ];
+
+	var newPos = [0,0,0];
+	var oldPos = [0,0,0];
+	curr_pos = 0;
 	function draw(width, height)
 	{
 		
-	  context.clearRect(0,0, width,height);
-	  context.beginPath();
-	  
-	  // Draws a circle of radius 20 at the coordinates 100,100 on the canvas
-	  x_coordinates_arr.push(x);
-	  y_coordinates_arr.push(y);
-	  context.arc(x,y,20,0,Math.PI*2,true);
-	  context.closePath();
-	  context.fill();
+		context.clearRect(0,0, width,height);		
+		drawball(x, y);
+
+		let max_width = width-20;
+		let max_height = height-20;
+		// Boundary Logic
+		//if( x<21 || x>max_width) dx=-dx; 
+		//if( y<21 || y>max_height) dy=-dy;
+		
+		var video_number = localStorage.getItem("vidCurrentPlayingNumber");
+		
+		if(video_number == 1)
+		{
+			steps = count_pos1[curr_pos];
+		}
+		else if(video_number == 2)
+		{
+			steps = count_pos2[curr_pos];
+		}
+		else if(video_number == 3)
+		{
+			steps = count_pos3[curr_pos];
+		}
+		
+		if(index ==  steps || index == 0)
+		{
+			oldPos = newPos;
+			newPos = getNextPosition();
+			if (index != 0){
+				curr_pos += 1;
+			}
+			else
+			{
+				oldPos = [x,y,0];
+			}
+			index = 0;
+		}
+		
+		var newq = get_dx_dy(oldPos[0], oldPos[1], newPos[0], newPos[1], newPos[2]);
+		dx=newq[0]; 
+		dy=newq[1];
+		
+		x+=dx;
+		y+=dy;
+		index += 1;
+	}
+	
+	
+	function drawball(x, y)
+	{
+		// Draws a circle of radius 20 at the coordinates 100,100 on the canvas
+		context.beginPath();
+		x_coordinates_arr.push(x);
+		y_coordinates_arr.push(y);
+		context.arc(x,y,20,0,Math.PI*2,true);
+		context.closePath();
+		context.fill();
 		z_axis_arr.push(alpha);
 		x_axis_arr.push(beta);
 		y_axis_arr.push(gamma);
-
-	  let max_width = width-20;
-	  let max_height = height-20;
-	  // Boundary Logic
-		if( x<21 || x>max_width) dx=-dx; 
-		if( y<21 || y>max_height) dy=-dy; 
-		x+=dx; 
-		y+=dy;
 	}
 	
+	function getNextPosition()
+	{
+		var h = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+		var w = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+		var video_number = localStorage.getItem("vidCurrentPlayingNumber");
+		
+		if(video_number == 1)
+		{
+			x_val = x_pos1[pos] * w;
+			y_val = y_pos1[pos] * h;
+			count_val = count_pos1[pos];
+		}
+		else if(video_number == 2)
+		{
+			x_val = x_pos2[pos] * w;
+			y_val = y_pos2[pos] * h;
+			count_val = count_pos2[pos];
+		}
+		else if(video_number == 3)
+		{
+			x_val = x_pos3[pos] * w;
+			y_val = y_pos3[pos] * h;
+			count_val = count_pos3[pos];
+		}
+		
+		pos += 1;
+		return [x_val, y_val, count_val];
+	}
+	
+	
+	
+	function get_dx_dy(old_x, old_y, new_x, new_y, count)
+	{
+		diff_x = new_x - old_x;
+		diff_y = new_y - old_y;
+		
+		new_dx = diff_x/count;
+		new_dy = diff_y/count;
+		
+		return [new_dx,new_dy];    
+	}
+	
+	
+	function makeRows(rows, cols) {
+		container.style.setProperty('--grid-rows', rows);
+		container.style.setProperty('--grid-cols', cols);
+		var ratioW = Math.floor($(window).width()/cols);
+		var ratioH = Math.floor($(window).height()/rows);
+		//console.log(ratioW);
+		//console.log(ratioH);
+		for (c = 0; c < (rows * cols); c++) {
+			let cell = document.createElement("div");
+			cell.style.height = ratioH-1+"px";
+			cell.style.width = ratioW-1+"px";
+			container.appendChild(cell).className = "grid-item";
+		}
+	}
+
+	
+	
+		
 	var intervalID;
 	var timer;
 	function startVideo(duration, display, width, height) {
@@ -686,30 +845,57 @@ font-weight: bold;
 		var temp = localStorage.getItem("vidCurrentPlayingNumber");
 		temp++;
 		localStorage.setItem("vidCurrentPlayingNumber", temp)
-		if(localStorage.getItem("vidCurrentPlayingNumber") == 1){
+		var h = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+		var w = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+		if(temp == 1){
+			//document.getElementById("ball").style.backgroundColor ="#ff0000";
 			context.fillStyle="#ff0000";
+			index = 0
+			pos = 0;
+			x = 0.02 * w ;
+			y = 0.02 * h;
+			steps = 0;
+			curr_pos = 0;
 		}
-		else if(localStorage.getItem("vidCurrentPlayingNumber") == 2){
+		else if(temp == 2){
+			//document.getElementById("ball").style.backgroundColor ="#00ff00";
 			context.fillStyle="#00ff00";
+			index = 0;
+			pos = 0;
+			x = 0.5 * w;
+			y = 0.5 * h;
+			steps = 0;
+			curr_pos = 0;
 		}
-		else if(localStorage.getItem("vidCurrentPlayingNumber") == 3){
+		else if(temp == 3){
+			//document.getElementById("ball").style.backgroundColor ="#0000ff";
 			context.fillStyle="#0000ff";
+			index = 0;
+			pos = 0;
+			x = 0.8 * w;
+			y = 0.8 * h;
+			steps = 0;
+			curr_pos = 0;
 		}
 		mediaRecorder.start();
 		clearInterval(intervalID);
 		var start = Date.now();
 		vidCanvas.style.display="block"
 		vidCanvas.style.backgroundColor = '#ffffff'
+		//document.getElementById("ball").style.display = 'none';
 		var theInterval = setInterval(function() {
-		if (Date.now() - start > 15000) {
-		  clearInterval(theInterval);
-		  mediaRecorder.stop();
-		  showUploadingGif();
-		  return;
+		if (Date.now() - start > 20000) {
+			clearInterval(theInterval);
+			mediaRecorder.stop();
+			showUploadingGif();
+			return;
 		}
-		draw(width, height); },50);
+
+		draw(width, height);	
+		},50);
 		
 	}
+	
 	
 	
 	function cancelFullScreen() {

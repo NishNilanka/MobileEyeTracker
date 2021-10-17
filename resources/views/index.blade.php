@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/app.css">
 
     <!-- WSU favicon -->
-    <link rel="icon" type="image/png" href="https://www.westernsydney.edu.au/__data/assets/file/0007/372562/WSU_Favicon-01.png?v=0.2.7"/>
+    <link rel="icon" type="image/png" href="https://www.westernsydney.edu.au/__data/assets/file/0007/372562/favicon.ico"/>
 
     <title>Eye Tracking Study | Western Sydney University</title>
   </head>

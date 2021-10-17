@@ -88,9 +88,8 @@
 			<div class="jumbotron">
 			<img src="{{ asset('wsu_logo-removebg-preview.png') }}" srcset="wsu_logo-removebg-preview.png 900w" sizes="(min-width: 1200px) 50vw,100vw" alt="tag">
 			<h1 class="display-4" style="padding-top: 30px;"><b>Thank You!</b></h1>
-			<p class="lead">Make sure you have copied the following study code prior to close your browser window.</p><br>
+			<p class="lead">The link to the usability survey can be opened by copying the following study code or taking a screenshot. <strong>Enter the code in the usability survey's first response.</strong></p><br>
 			</div>
-			<br>
 			<input type="text" value="" id="hashcode" readonly>
 			<p></p>
 			<br>
@@ -98,6 +97,15 @@
 		<button type="button" class="btn btn-outline-primary" onclick="copyfunction()">Copy study code</button>
 		  <button id="button" class="btn btn-outline-primary" onclick="takeScreenshot()">Take a Screenshot!</button>
 		</center>
+		<center>
+		<br>
+		
+		<div id="link" style="display: none">
+		<p class="lead">To access the usability survey, click on the following link.</p><br>
+		<button type="button" onclick="location.href='https://forms.gle/gdoWoSTfdoDEpyZh6';" class="btn btn-outline-primary">Go to survey</button><br>
+		</div>
+		</center>
+		<br>
 
 	</div>
 	</div>
@@ -120,6 +128,7 @@
 
 	  /* Alert the copied text */
 	  alert("Copied the text: " + copyText.value);
+	  showLink();
 	}
 	
 	function takeScreenshot() {
@@ -129,7 +138,17 @@
       return Canvas2Image.saveAsPNG(canvas);
     }
   });
+  showLink();
 }
+
+
+	function showLink()
+	{
+		var x = document.getElementById("link");
+		  if (x.style.display === "none") {
+			x.style.display = "block";
+		  }
+	}
 	
 	
 

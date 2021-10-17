@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+</head>
+
+<body>
+
+<video id="video" class="video" height="400" width="400" playsinline autoplay muted loop></video>
+
+
+</body>
+
+
+<script>
+
+var video = document.getElementById("video");
+
+navigator.mediaDevices.getUserMedia({video: true, audio: false})
+    .then(function(s) {
+    stream = s;
+    video.srcObject = s;
+    video.play();
+  })
+  
+  
+</script>
