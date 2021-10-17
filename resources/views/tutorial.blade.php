@@ -328,27 +328,6 @@ position:fixed;
 	var vidCurrentPlayingNumber = 0;
 	var cameraFace = false;
 
-	
-	function toggleFullScreen() {
-	  if (!document.fullscreenElement) {
-
-		var elem = document.getElementById("video");
-		if (elem.requestFullscreen) {
-		  elem.requestFullscreen();
-		} else if (elem.mozRequestFullScreen) {
-		  elem.mozRequestFullScreen();
-		} else if (elem.webkitRequestFullscreen) {
-		  elem.webkitRequestFullscreen();
-		} else if (elem.msRequestFullscreen) {
-		  elem.msRequestFullscreen();
-		}
-
-	  } else {
-		if (document.exitFullscreen) {
-		  document.exitFullscreen();
-		}
-	  }
-	}
 
 	function resize_canvas(element)
 	{
@@ -368,9 +347,6 @@ position:fixed;
 	}
 
 	//makeRows(8, 3);
-	const hdConstraints = {
-	  video: {width: {min: 1280}, height: {min: 720}}
-	};
 
 	navigator.mediaDevices.getUserMedia({video: true}).
 	  then((stream) => {video.srcObject = stream}).catch(handleError);;
@@ -407,6 +383,8 @@ position:fixed;
 	  }
 
 	  const constraints = {
+		video:true,
+			audio: false,
 		video: {
 		  deviceId: {exact: videoSelect.value}
 		}
@@ -512,6 +490,8 @@ position:fixed;
 	
 	function startAgain()
 	{
+			navigator.mediaDevices.getUserMedia({video: true}).
+	  then((stream) => {video.srcObject = stream}).catch(handleError);
 		document.getElementById("webcam").style.display = "block";
 		document.getElementById("videoUpload").style.display = 'none';
 		document.getElementById("myCanvas").style.display = 'none';
@@ -532,6 +512,7 @@ position:fixed;
 		videoSource = videoSelect.value;
 		recorderstatus = true;
 		var constraintObj = {
+			video:true,
 			audio: false,
 			video: {
 				deviceId: videoSource
@@ -540,7 +521,7 @@ position:fixed;
 			}
 		};
 
-		navigator.mediaDevices.getUserMedia(constraintObj).then(gotStream).catch(handleError);
+		//navigator.mediaDevices.getUserMedia(constraintObj).then(gotStream).catch(handleError);
 		navigator.mediaDevices.getUserMedia(constraintObj).then(
 		function(mediaStreamObj) {
 			var canvas = document.getElementById('myCanvas');
@@ -557,14 +538,16 @@ position:fixed;
 			
 			let vidchunks = [];
 			mediaRecorder.ondataavailable = function(ev) {
+				console.log("Hi CHandimaaa");
+				console.log(ev.data);
 				vidchunks.push(ev.data);
 			}
 
 			var timerId;
 			mediaRecorder.onstop = (ev)=>{
+				console.log(vidchunks);
 				let blob = new Blob(vidchunks, { 'type' : 'video/mp4'});
 				vidchunks = [];
-				let videoURL = window.URL.createObjectURL(blob);
 				
 				console.log("FPS - " + fps);
 				console.log("height - " + height);
@@ -897,26 +880,6 @@ position:fixed;
 	}
 	
 	
-	
-	function cancelFullScreen() {
-            var el = document;
-            var requestMethod = el.cancelFullScreen||el.webkitCancelFullScreen||el.mozCancelFullScreen||el.exitFullscreen||el.webkitExitFullscreen;
-			if(vidCanvas.cancelFullScreen){
-				vidCanvas.cancelFullScreen();
-			}else if(vidCanvas.webkitCancelFullScreen){
-				vidCanvas.webkitCancelFullScreen();
-			}else if(vidCanvas.mozCancelFullScreen){
-				vidCanvas.mozCancelFullScreen();
-			}else if(vidCanvas.exitFullscreen){
-				vidCanvas.exitFullscreen();
-			}else if(vidCanvas.webkitExitFullscreen){
-				vidCanvas.webkitExitFullscreen();
-			}
-			else{
-				alert("This browser doesn't supporter fullscreen");
-			}
-
-	}
 	
 	function fullscreen(){
 	document.getElementById("cv1").style.display = 'none';
