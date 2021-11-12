@@ -160,25 +160,24 @@
             </form>
         </div>
 		
-		<center>
-		  <!-- Record again optional Modal -->
-            <div class="modal fade" id="OptModal" tabindex="-1" aria-labelledby="optLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="beginModalLabel">Device Not Supported</h5>
-                            <!--<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-                        </div>
-                        <div class="modal-body">
-                            You need to have a mobile device (smartphone or tablet) with a front-facing camera to perform this study.<br>
-                        </div>
-                        <div class="modal-footer">
-                            <button id="home" type="button" data-bs-dismiss="modal" class="btn btn-lg btn-primary">Home</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </center>
+
+		<div class="modal fade" id="OptModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title" id="beginModalLabel">Device Not Supported</h5>
+			  </div>
+			  <div class="modal-body">
+				You need to have a mobile device (smartphone or tablet) with a front-facing camera to perform this study.<br>
+			  </div>
+			  <div class="modal-footer">
+				<button id="home" type="button" class="btn btn-primary">Home</button>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		
+		 
 
     </body>
 
@@ -196,8 +195,8 @@
 	document.getElementById("useragent").value = navigator.userAgent;
 	if(mobileOrTablet == 0)
 	{
-		//var OptModal = new bootstrap.Modal(document.getElementById('OptModal'), {});
-		//OptModal.show();
+		var OptModal = new bootstrap.Modal(document.getElementById('OptModal'), {});
+		OptModal.show();
 	}
 	};
 

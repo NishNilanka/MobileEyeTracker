@@ -88,7 +88,7 @@
 			<div class="jumbotron">
 			<img src="{{ asset('wsu_logo-removebg-preview.png') }}" srcset="wsu_logo-removebg-preview.png 900w" sizes="(min-width: 1200px) 50vw,100vw" alt="tag">
 			<h1 class="display-4" style="padding-top: 30px;"><b>Thank You!</b></h1>
-			<p class="lead">The link to the usability survey can be opened by copying the following study code or taking a screenshot. <strong>Enter the code in the usability survey's first response.</strong></p><br>
+			<p style="color:red;" class="lead"><strong>After copying the following study code or taking a screenshot, the link to the usability survey will appear. Enter the study code in the usability survey's first response.</strong></p><br>
 			</div>
 			<input type="text" value="" id="hashcode" readonly>
 			<p></p>

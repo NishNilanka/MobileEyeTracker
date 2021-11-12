@@ -155,46 +155,46 @@ position:fixed;
 	</div>
 	
 	<!-- start Modal -->
-	<div class="modal fade" id="beginModal" tabindex="-1" aria-labelledby="beginModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-scrollable">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="beginModalLabel"><b>Before we continue...</b></h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<ul>
+	<!-- Modal -->
+	<div class="modal fade" id="beginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title" id="staticBackdropLabel">Before we continue...</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+			<ul>
 						<li><strong>Carefully read all the instructions before starting the test.</strong></li>
-						<br>
-						<li>We need your support to develop a eye-tracking algorithm on video type content with the use of a mobile device front-facing camera.</li>
 						<br>
 						<li>During the study, you have to look at a moving circle on the screen and your face will be captured from the front-facing camera of your mobile device.</li>
 						<br>
-						<li>You are requested to contribute three (3) videos by keeping the mobile device in three (3) different positions</li>
-						<br>
 						<li>Throughout the study, hold the device vertically, positioning the camera at the top of the device</li>
 						<br>
-						<img src="{{ asset('phoneside.png') }}" style="display: block; margin-left: auto; margin-right: auto;" srcset="phoneside.png 900w" sizes="(min-width: 1200px) 50vw,100vw" alt="tag">
+						<img src="{{ asset('phoneside1.png') }}" style="display: block; margin-left: auto; margin-right: auto;" srcset="phoneside1.png 900w" sizes="(min-width: 1200px) 50vw,80vw" alt="tag">
 					</ul>
 
-				</div>
-				<div class="modal-footer">
-					<button type="button" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#beginModal2" class="btn btn-lg btn-success"> Next</button>
-				</div>
-			</div>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#beginModal2" class="btn btn-lg btn-success"> Next</button>
+		  </div>
 		</div>
+	  </div>
 	</div>
+	
+	
 
 	 <!-- start Modal 2-->
-	 <div class="modal fade " id="beginModal2" tabindex="-1" aria-labelledby="beginModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-scrollable">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="beginModalLabel"><b>Before we continue...</b></h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<p>Make sure that :</p>
+	 <!-- Modal -->
+	<div class="modal fade" id="beginModal2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title" id="staticBackdropLabel">Before we continue...</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+			<p>Make sure that :</p>
 					<ul>
 						<li>Your face is visible and align as shown in the following image.</li>
 						<br>
@@ -207,27 +207,28 @@ position:fixed;
 						
 						<img src="{{ asset('Capturing1.jpg') }}" style="display: block; margin-left: auto; margin-right: auto;" srcset="Capturing1.jpg 900w"  width="120" height="120"  alt="tag">
 					</ul>
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#beginModal3" class="btn btn-lg btn-success"> Next</button>
-				</div>
-			</div>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#beginModal3" class="btn btn-lg btn-success"> Next</button>
+		  </div>
 		</div>
+	  </div>
 	</div>
+	 
+	 
 			
 			
-			
-	 <!-- start Modal 3-->
-	 <div class="modal fade" id="beginModal3" tabindex="-1" aria-labelledby="beginModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-scrollable">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="beginModalLabel"><b>Before we continue...</b></h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<p>You are requested to contribute three (3) videos by keeping the mobile device in three (3) different positions:</p>
+	
+	<!-- start Modal 3-->
+	<div class="modal fade" id="beginModal3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title" id="staticBackdropLabel">Before we continue...</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+			<p>You are requested to contribute three (3) videos by keeping the mobile device in three (3) different positions:</p>
 					<ol class="o">
 						<li>First video - Keep your mobile device below the eye level (Looking down)</li>
 						<br>
@@ -238,36 +239,42 @@ position:fixed;
 						<img src="{{ asset('position.jpg') }}" style="display: block; margin-left: auto; margin-right: auto;" srcset="position.jpg 900w"  width="300" height="200"  alt="tag">
 					
 
-				</div>
-				<div class="modal-footer">
-					<button type="button" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#OptModal" class="btn btn-lg btn-success"> Next</button>
-				</div>
-			</div>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#OptModal" class="btn btn-lg btn-success"> Next</button>
+		  </div>
 		</div>
+	  </div>
 	</div>
 	
+	
+	 
+	 
+	
 	 <!-- Record again optional Modal -->
-            <div class="modal fade" id="OptModal" tabindex="-1" aria-labelledby="optLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-                <div class="modal-dialog modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="OptModalLable">Start Recording</h5>
-                            <!--<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-                        </div>
-                        <div class="modal-body">
-							<p id="successUpload" style="display: none;">Video successfully uploaded.</p>
+	 
+	 <div class="modal fade" id="OptModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title" id="OptModalLable">Start Recording</h5>
+			  </div>
+			  <div class="modal-body">
+				<p id="successUpload" style="display: none;">Video successfully uploaded.</p>
                             <p id="msgText" style="display: none;">To record in the next position, Press the "Continue" Button.</p>
 							<p id="devicepos">Make certain that you <strong id="positiontxt">are looking down at the device</strong> during the recording and refrain from moving while it is being done.</p>
 							<img id="positionimg" src="{{ asset('Looking_Down.jpg') }}" style="display: block; margin-left: auto; margin-right: auto;" width="100" height="120"  alt="tag">
                         </div>
-                        <div class="modal-footer">
-                            <button id="finishbtn" type="button" data-bs-dismiss="modal" class="btn btn-lg btn-primary" style="display: none;">Finish</button>  
-                            <button id="againbtn" onclick="startAgain();" type="button" data-bs-dismiss="modal" class="btn btn-lg btn-primary">Continue</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </center>
+			  <div class="modal-footer">
+				<button id="finishbtn" type="button" data-bs-dismiss="modal" class="btn btn-lg btn-primary" style="display: none;">Finish</button>  
+                 <button id="againbtn" onclick="startAgain();" type="button" data-bs-dismiss="modal" class="btn btn-lg btn-primary">Continue</button>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		
+           
+
 
 	
 	<!-- Confirmation Modal -->
@@ -546,6 +553,14 @@ position:fixed;
 			var timerId;
 			mediaRecorder.onstop = (ev)=>{
 				console.log(vidchunks);
+				if(vidchunks.length == 1 && vidchunks[0].size == 0){
+					console.log('video size = 0 ');
+					let vidId = parseInt(localStorage.getItem("vidCurrentPlayingNumber"));
+					localStorage.setItem("vidCurrentPlayingNumber", --vidId);
+					startAfterError();
+					return;
+					
+				}
 				let blob = new Blob(vidchunks, { 'type' : 'video/mp4'});
 				vidchunks = [];
 				
@@ -633,6 +648,17 @@ position:fixed;
 		console.log('Created Recorder using:', videoSource);
 	}
 	
+	function startAfterError(){
+		var OptModal = new bootstrap.Modal(document.getElementById('OptModal'), {});
+		document.getElementById("successUpload").innerHTML = "Upload failed";
+		document.getElementById("msgText").innerHTML = "There was an error while recording the video. Press the 'Continue' Button to try again.";
+		document.getElementById("msgText").style.display="block";
+		document.getElementById("successUpload").style.display="block";
+		document.getElementById("finishbtn").style.display="none";
+		document.getElementById("againbtn").style.display="block";
+		 OptModal.show();
+		
+	}
 	function showUploadingGif()
 	{
 		document.getElementById("myCanvas").style.display = 'none';
