@@ -4,10 +4,17 @@
 <!-- CSS for Player -->
 <style>
 
+	video {
+	  -webkit-transform: scaleX(-1);
+	  transform: scaleX(-1);
+	}
+
 	.video-view {
 
 	 
 	}
+	
+	
 	
 	* { margin:0; padding:0; }
 
@@ -157,7 +164,7 @@ position:fixed;
 	<!-- start Modal -->
 	<!-- Modal -->
 	<div class="modal fade" id="beginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-	  <div class="modal-dialog">
+	  <div class="modal-dialog modal-dialog-scrollable">
 		<div class="modal-content">
 		  <div class="modal-header">
 			<h5 class="modal-title" id="staticBackdropLabel">Before we continue...</h5>
@@ -166,6 +173,8 @@ position:fixed;
 		  <div class="modal-body">
 			<ul>
 						<li><strong>Carefully read all the instructions before starting the test.</strong></li>
+						<br>
+						<li style="color:red">Those who do not adhere to these instructions will have their recordings rejected immediately, and you will not be compensated by Amazon MTurk.</li>
 						<br>
 						<li>During the study, you have to look at a moving circle on the screen and your face will be captured from the front-facing camera of your mobile device.</li>
 						<br>
@@ -187,21 +196,21 @@ position:fixed;
 	 <!-- start Modal 2-->
 	 <!-- Modal -->
 	<div class="modal fade" id="beginModal2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-	  <div class="modal-dialog">
+	  <div class="modal-dialog modal-dialog-scrollable">
 		<div class="modal-content">
 		  <div class="modal-header">
 			<h5 class="modal-title" id="staticBackdropLabel">Before we continue...</h5>
 			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		  </div>
 		  <div class="modal-body">
-			<p>Make sure that :</p>
+			
+			<p><strong>Make sure that :</strong></p>
 					<ul>
+						<li>You are completely focused on the moving ball on the screen.</li>
+						<li>While your face is being recorded, do not converse with others.</li>
 						<li>Your face is visible and align as shown in the following image.</li>
-						<br>
 						<li>You have good light in your room.</li>
-						<br>
 						<li>There is no strong light behind your back.</li>
-						<br>
 						<li>There is no light reflections on your glasses.</li>
 						<br>
 						
@@ -221,7 +230,7 @@ position:fixed;
 	
 	<!-- start Modal 3-->
 	<div class="modal fade" id="beginModal3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-	  <div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-scrollable">
 		<div class="modal-content">
 		  <div class="modal-header">
 			<h5 class="modal-title" id="staticBackdropLabel">Before we continue...</h5>
@@ -238,7 +247,7 @@ position:fixed;
 					</ol>
 						<img src="{{ asset('position.jpg') }}" style="display: block; margin-left: auto; margin-right: auto;" srcset="position.jpg 900w"  width="300" height="200"  alt="tag">
 					
-
+			
 		  </div>
 		  <div class="modal-footer">
 			<button type="button" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#OptModal" class="btn btn-lg btn-success"> Next</button>
@@ -295,6 +304,27 @@ position:fixed;
                     </div>
                 </div>
             </div>
+			
+			
+			<div class="modal fade" id="recorderModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title" id="staticBackdropLabel">Please enable your MediaRecorder API</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+			<ul>
+				<li>Please Go to Settings &#8594; Safari &#8594; Advanced &#8594; Experimental Features</li><br>
+				<li>Enable MediaRecorder</li>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#beginModal3" class="btn btn-lg btn-warning"> Ok</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+		
 
            
 
@@ -336,6 +366,11 @@ position:fixed;
 	var cameraFace = false;
 
 
+	if(typeof MediaRecorder == "undefined"){
+		var medaRecorderModal = new bootstrap.Modal(document.getElementById('recorderModal'), {});
+		medaRecorderModal.show();	
+	}
+
 	function resize_canvas(element)
 	{
 	  var w = element.offsetWidth;
@@ -363,8 +398,12 @@ position:fixed;
 	const videoElement = document.querySelector('video');
 	const videoSelect = document.querySelector('select#videoSource');
 
-	navigator.mediaDevices.enumerateDevices()
+
+		
+		navigator.mediaDevices.enumerateDevices()
 	  .then(gotDevices).then(getStream).catch(handleError);
+
+	
 
 	videoSelect.onchange = getStream;
 
@@ -374,9 +413,9 @@ position:fixed;
 		const option = document.createElement('option');
 		option.value = deviceInfo.deviceId;
 		if (deviceInfo.kind === 'videoinput') {
-		  option.text = deviceInfo.label || 'camera ' +
-			(videoSelect.length + 1);
-		  videoSelect.appendChild(option);
+				option.text = deviceInfo.label || 'camera ' +
+					(videoSelect.length + 1);
+				videoSelect.appendChild(option);
 		}
 	  }
 	}
@@ -545,7 +584,6 @@ position:fixed;
 			
 			let vidchunks = [];
 			mediaRecorder.ondataavailable = function(ev) {
-				console.log("Hi CHandimaaa");
 				console.log(ev.data);
 				vidchunks.push(ev.data);
 			}
@@ -558,6 +596,8 @@ position:fixed;
 					let vidId = parseInt(localStorage.getItem("vidCurrentPlayingNumber"));
 					localStorage.setItem("vidCurrentPlayingNumber", --vidId);
 					startAfterError();
+					x_coordinates_arr = [];
+					y_coordinates_arr = [];
 					return;
 					
 				}
@@ -593,8 +633,16 @@ position:fixed;
 					method: 'post',
 					body: coordinatesData
 				})
-				.then(response => {console.log('Coordinates upload success')})
-				.catch(error => {console.log('Coordinates upload error');})
+				.then(response => {
+					console.log('Coordinates upload success');
+					x_coordinates_arr = [];
+					y_coordinates_arr = [];
+					})
+				.catch(error => {
+					console.log('Coordinates upload error');
+					x_coordinates_arr = [];
+					y_coordinates_arr = [];
+				})
 				
 				
 				//sendDeviceOrientationDetails
@@ -759,6 +807,7 @@ position:fixed;
 		x_coordinates_arr.push(x);
 		y_coordinates_arr.push(y);
 		context.arc(x,y,20,0,Math.PI*2,true);
+		context.stroke();
 		context.closePath();
 		context.fill();
 		z_axis_arr.push(alpha);
@@ -868,7 +917,7 @@ position:fixed;
 		}
 		else if(temp == 2){
 			//document.getElementById("ball").style.backgroundColor ="#00ff00";
-			context.fillStyle="#00ff00";
+			context.fillStyle="#000000";
 			index = 0;
 			pos = 0;
 			x = 0.5 * w;

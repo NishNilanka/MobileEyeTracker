@@ -302,26 +302,20 @@ Acer,Predator 8
 alcatel,3
 alcatel,5
 alcatel,7
-alcatel,1B (2020)
-alcatel,1c (2019)
-alcatel,1s
-alcatel,1S (2020)
+alcatel,1B
+alcatel,1c
+alcatel,1S
 alcatel,1T 10
 alcatel,1T 7
-alcatel,1v (2019)
-alcatel,1V (2020)
+alcatel,1v
 alcatel,1x
-alcatel,1x (2019)
-alcatel,3 (2019)
+alcatel,3
 alcatel,3c
 alcatel,3L
-alcatel,3L (2020)
 alcatel,3T 10
 alcatel,3T 8
 alcatel,3v
-alcatel,3v (2019)
 alcatel,3x
-alcatel,3x (2019)
 alcatel,5v
 alcatel,A3
 alcatel,A3 XL
@@ -331,7 +325,7 @@ alcatel,A7 XL
 alcatel,Fierce 4
 alcatel,Fierce XL
 alcatel,Fierce XL (Windows)
-alcatel,Flash (2017)
+alcatel,Flash
 alcatel,Flash 2
 alcatel,Flash Plus
 alcatel,Flash Plus 2
@@ -357,7 +351,6 @@ alcatel,Pixi 4 (3.5)
 alcatel,Pixi 4 (4)
 alcatel,Pixi 4 (5)
 alcatel,Pixi 4 (6)
-alcatel,Pixi 4 (6) 3G
 alcatel,Pixi 4 (7)
 alcatel,Pixi 4 Plus Power
 alcatel,Pixi First
@@ -373,6 +366,7 @@ alcatel,Pop Star
 alcatel,Pop Up
 alcatel,Pulsemix
 alcatel,Shine Lite
+alcatel,Smart Tab 7
 alcatel,Tetra
 alcatel,U5
 alcatel,U5 HD
@@ -460,7 +454,7 @@ Allview,X4 Xtreme
 Allview,X5 Soul
 Amazon,Fire 7
 Amazon,Fire HD 10
-Amazon,Fire HD 10 (2017)
+Amazon,Fire HD 10 Plus
 Amazon,Fire HD 8
 Amazon,Fire HD 8 Plus 
 Archos,50 Cobalt
@@ -915,6 +909,9 @@ Google,Pixel 3a
 Google,Pixel 3a XL
 Google,Pixel 4
 Google,Pixel 4 XL
+Google,Pixel 4a
+Google,Pixel 5
+Google,Pixel 5a
 Google,Pixel C
 Google,Pixel XL
 Haier,G8
@@ -929,6 +926,7 @@ Honor,20
 Honor,30
 Honor,10 Lite
 Honor,10i
+Honor,10X Lite
 Honor,20 lite
 Honor,20 lite (China)
 Honor,20 Pro
@@ -937,8 +935,13 @@ Honor,20i
 Honor,20S
 Honor,30 Pro
 Honor,30 Pro+
+Honor,30 Youth
+Honor,30i
 Honor,30S
 Honor,4C
+Honor,50
+Honor,50 Pro
+Honor,50 SE
 Honor,5A
 Honor,5c
 Honor,5X
@@ -969,29 +972,48 @@ Honor,Holly 2 Plus
 Honor,Holly 3
 Honor,Magic
 Honor,Magic 2
+Honor,Magic3
+Honor,Magic3 Pro
+Honor,Magic3 Pro+
 Honor,Note 10
 Honor,Note 8
 Honor,Pad 2
 Honor,Pad 5 10.1
 Honor,Pad 5 8
+Honor,Pad 6
+Honor,Pad X6
 Honor,Play
+Honor,Play 20
 Honor,Play 3
 Honor,Play 3e
 Honor,Play 4T
 Honor,Play 4T Pro
+Honor,Play 5
+Honor,Play 5T Pro
+Honor,Play 5T Youth
 Honor,Play 8A
 Honor,Play 9A
 Honor,Play4
 Honor,Play4 Pro
 Honor,Tab 5
+Honor,Tab 7
+Honor,Tablet V7
+Honor,Tablet V7 Pro
+Honor,Tablet X7
 Honor,V30 Pro
+Honor,V40
+Honor,V40 Lite
 Honor,V6
 Honor,V8
 Honor,View 10
 Honor,View 20
 Honor,View30
 Honor,View30 Pro
+Honor,View40
 Honor,X10 5G
+Honor,X10 Max
+Honor,X20
+Honor,X20 SE
 HP,Elite x3
 HP,Pro Slate 10 EE G1
 HP,Pro Slate 12
@@ -1009,7 +1031,9 @@ HTC,Desire 12+
 HTC,Desire 12s
 HTC,Desire 19+
 HTC,Desire 19s
+HTC,Desire 20+
 HTC,Desire 20 Pro
+HTC,Desire 21 Pro
 HTC,Desire 320
 HTC,Desire 326G dual sim
 HTC,Desire 520
@@ -1063,6 +1087,12 @@ HTC,U12+
 HTC,U19e
 HTC,U20 5G
 HTC,Ville
+HTC,Wildfire E
+HTC,Wildfire E1
+HTC,Wildfire E1 lite
+HTC,Wildfire E1 plus
+HTC,Wildfire E2
+HTC,Wildfire E3
 HTC,Wildfire R70
 HTC,Wildfire X
 HTC,Zeta
@@ -1070,19 +1100,25 @@ Huawei,Ascend G628
 Huawei,Ascend Y540
 Huawei,Enjoy 10
 Huawei,Enjoy 10 Plus
+Huawei,Enjoy 10e
 Huawei,Enjoy 10s
+Huawei,Enjoy 20
+Huawei,Enjoy 20 Plus
 Huawei,Enjoy 20 Pro
+Huawei,Enjoy 20 SE
 Huawei,Enjoy 5s
 Huawei,Enjoy 6
 Huawei,Enjoy 6s
 Huawei,Enjoy 9
 Huawei,Enjoy 9e
 Huawei,Enjoy 9s
+Huawei,Enjoy Tablet 2
 Huawei,Enjoy Z 5G
 Huawei,G10
 Huawei,G7 Plus
 Huawei,G8
 Huawei,G9 Plus
+Huawei,GR5
 Huawei,Mate 10
 Huawei,Mate 10 Lite
 Huawei,Mate 10 Porsche Design
@@ -1098,15 +1134,25 @@ Huawei,Mate 30 5G
 Huawei,Mate 30 Pro
 Huawei,Mate 30 Pro 5G
 Huawei,Mate 30 RS Porsche Design
+Huawei,Mate 30E Pro
+Huawei,Mate 40
+Huawei,Mate 40 Pro
+Huawei,Mate 40 Pro+
+Huawei,Mate 40 RS Porsche Design
+Huawei,Mate 40E
 Huawei,Mate 8
 Huawei,Mate 9
 Huawei,Mate 9 Porsche Design
 Huawei,Mate 9 Pro
 Huawei,Mate RS Porsche Design
 Huawei,Mate S
+Huawei,Mate X2
 Huawei,MatePad
+Huawei,MatePad 10.4
+Huawei,MatePad 10.8
 Huawei,MatePad Pro
 Huawei,MatePad Pro 5G
+Huawei,MatePad T 10s
 Huawei,MatePad T8
 Huawei,MediaPad M2 10.0
 Huawei,MediaPad M2 7.0
@@ -1149,16 +1195,25 @@ Huawei,nova 5i Pro
 Huawei,nova 5T
 Huawei,nova 5z
 Huawei,nova 6
-Huawei,nova 6 5G
+Huawei,nova 6
 Huawei,nova 6 SE
-Huawei,nova 7 5G
-Huawei,nova 7 Pro 5G
+Huawei,nova 7
+Huawei,nova 7 Pro
 Huawei,nova 7 SE
+Huawei,nova 7 SE Youth
 Huawei,nova 7i
+Huawei,nova 8
+Huawei,nova 8 Pro
+Huawei,nova 8 SE
+Huawei,nova 8 SE Youth
+Huawei,nova 8i
+Huawei,nova 9
+Huawei,nova 9 Pro
 Huawei,nova plus
 Huawei,P smart
 Huawei,P smart 2019
 Huawei,P smart 2020
+Huawei,P smart 2021
 Huawei,P smart Pro 2019
 Huawei,P Smart S
 Huawei,P Smart Z
@@ -1181,6 +1236,8 @@ Huawei,P40 lite 5G
 Huawei,P40 lite E
 Huawei,P40 Pro
 Huawei,P40 Pro+
+Huawei,P50
+Huawei,P50 Pro
 Huawei,P8
 Huawei,P8 Lite (2017)
 Huawei,P8lite
@@ -1195,8 +1252,7 @@ Huawei,Y Max
 Huawei,Y3 
 Huawei,Y360
 Huawei,Y3II
-Huawei,Y5 (2017)
-Huawei,Y5 (2019)
+Huawei,Y5
 Huawei,Y5 lite (2018)
 Huawei,Y5 Prime (2018)
 Huawei,Y560
@@ -1212,21 +1268,17 @@ Huawei,Y625
 Huawei,Y635
 Huawei,Y6II Compact
 Huawei,Y6p
-Huawei,Y6s (2019)
+Huawei,Y6s
 Huawei,Y7
-Huawei,Y7 (2018)
-Huawei,Y7 (2019)
+Huawei,Y7a
 Huawei,Y7 Prime
-Huawei,Y7 Prime (2018)
-Huawei,Y7 Prime (2019)
-Huawei,Y7 Pro (2018)
-Huawei,Y7 Pro (2019)
+Huawei,Y7 Pro
 Huawei,Y7p
 Huawei,Y8p
 Huawei,Y8s
-Huawei,Y9 (2018)
-Huawei,Y9 (2019)
-Huawei,Y9 Prime (2019)
+Huawei,Y9
+Huawei,Y9 Prime
+Huawei,Y9a
 Huawei,Y9s
 Icemobile,G8
 Icemobile,G8 LTE
@@ -1897,8 +1949,21 @@ OnePlus,7 Pro 5G
 OnePlus,7T
 OnePlus,7T Pro
 OnePlus,7T Pro 5G McLaren
+OnePlus,8
 OnePlus,8 5G (T-Mobile)
 OnePlus,8 5G UW (Verizon)
+OnePlus,8 Pro
+OnePlus,8T
+OnePlus,9
+OnePlus,9R
+OnePlus,9RT
+OnePlus,9 Pro
+OnePlus,Nord
+OnePlus,Nord 2
+OnePlus,Nord CE
+OnePlus,Nord N100
+OnePlus,Nord N10
+OnePlus,Nord N200
 OnePlus,X
 Oppo,A1
 Oppo,A12e
@@ -2182,11 +2247,6 @@ Realme,X50 Pro Player
 Realme,X50m 5G
 Realme,XT
 Realme,XT 730G
-Samsung,Z1
-Samsung,Z2
-Samsung,Z3
-Samsung,Z3 Corporate
-Samsung,Z4
 Sharp,Aquos B10
 Sharp,Aquos C10
 Sharp,Aquos Crystal 2
@@ -2610,11 +2670,32 @@ Xiaomi,Black Shark 2
 Xiaomi,Black Shark 2 Pro
 Xiaomi,Black Shark 3
 Xiaomi,Black Shark 3 Pro
+Xiaomi,Black Shark 3S
+Xiaomi,Black Shark 4
+Xiaomi,Black Shark 4 Pro
+Xiaomi,Black Shark 4S
+Xiaomi,Black Shark 4S Pro
 Xiaomi,Black Shark Helo
 Xiaomi,Mi 10 5G
 Xiaomi,Mi 10 Lite 5G
 Xiaomi,Mi 10 Pro 5G
 Xiaomi,Mi 10 Youth 5G
+Xiaomi,Mi 10 Ultra
+Xiaomi,Mi 10i
+Xiaomi,Mi 10S
+Xiaomi,Mi 10T
+Xiaomi,Mi 10T Pro
+Xiaomi,Mi 10T Lite
+Xiaomi,Mi 11
+Xiaomi,Mi 11i
+Xiaomi,Mi 11T
+Xiaomi,Mi 11T Pro
+Xiaomi,Mi 11 Lite
+Xiaomi,Mi 11 Lite NE
+Xiaomi,Mi 11 Pro
+Xiaomi,Mi 11 Ultra
+Xiaomi,Mi 11X
+Xiaomi,Mi 11X Pro
 Xiaomi,Mi 4c
 Xiaomi,Mi 4i
 Xiaomi,Mi 4s
@@ -2657,6 +2738,7 @@ Xiaomi,Mi Mix 2S
 Xiaomi,Mi Mix 3
 Xiaomi,Mi Mix 3 5G
 Xiaomi,Mi Mix Alpha
+Xiaomi,Mi Mix Fold
 Xiaomi,Mi Note
 Xiaomi,Mi Note 10
 Xiaomi,Mi Note 10 Lite
@@ -2669,10 +2751,26 @@ Xiaomi,Mi Pad 2
 Xiaomi,Mi Pad 3
 Xiaomi,Mi Pad 4
 Xiaomi,Mi Pad 4 Plus
+Xiaomi,Mi Pad 5 Pro
 Xiaomi,Mi Play
+Xiaomi,Poco C3
+Xiaomi,Poco C31
 Xiaomi,Poco F2 Pro
+Xiaomi,Poco F3
+Xiaomi,Poco F3 GT
+Xiaomi,Poco M2
+Xiaomi,Poco M2 Pro
+Xiaomi,Poco M2 Reloaded
+Xiaomi,Poco M3
+Xiaomi,Poco M3 Pro
 Xiaomi,Poco X2
+Xiaomi,Poco X3
+Xiaomi,Poco X3 GT
+Xiaomi,Poco X3 NFC
+Xiaomi,Poco X3 Pro
 Xiaomi,Pocophone F1
+Xiaomi,Redmi 10
+Xiaomi,Redmi 10 Prime
 Xiaomi,Redmi 10X 4G
 Xiaomi,Redmi 10X 5G
 Xiaomi,Redmi 10X Pro 5G
@@ -2701,16 +2799,41 @@ Xiaomi,Redmi 8A
 Xiaomi,Redmi 8A Dual
 Xiaomi,Redmi 8A Pro
 Xiaomi,Redmi 9
+Xiaomi,Redmi 9 (India)
+Xiaomi,Redmi 9 Activ
+Xiaomi,Redmi 9 Prime
+Xiaomi,Redmi 9 Power
+Xiaomi,Redmi 9A
+Xiaomi,Redmi 9A Sport
+Xiaomi,Redmi 9AT
+Xiaomi,Redmi 9C NFC
+Xiaomi,Redmi 9i
+Xiaomi,Redmi 9i Sport
+Xiaomi,Redmi 9T
 Xiaomi,Redmi Go
 Xiaomi,Redmi K20
 Xiaomi,Redmi K20 Pro
 Xiaomi,Redmi K20 Pro Premium
 Xiaomi,Redmi K30
+Xiaomi,Redmi K30S
 Xiaomi,Redmi K30 5G
 Xiaomi,Redmi K30 5G Racing
 Xiaomi,Redmi K30 Pro
+Xiaomi,Redmi K30 Pro Ultra
 Xiaomi,Redmi K30 Pro Zoom
 Xiaomi,Redmi K30i 5G
+Xiaomi,Redmi K40
+Xiaomi,Redmi K40 Gaming
+Xiaomi,Redmi K40 Pro
+Xiaomi,Redmi K40 Pro+
+Xiaomi,Redmi Note 10
+Xiaomi,Redmi Note 10 Lite
+Xiaomi,Redmi Note 10 Pro
+Xiaomi,Redmi Note 10 Pro Max
+Xiaomi,Redmi Note 10 Pro(China)
+Xiaomi,Redmi Note 10 Pro(India)
+Xiaomi,Redmi Note 10S
+Xiaomi,Redmi Note 10T
 Xiaomi,Redmi Note 2
 Xiaomi,Redmi Note 3
 Xiaomi,Redmi Note 3 (MediaTek)
@@ -2810,6 +2933,12 @@ ZTE,Axon 10 Pro 5G
 ZTE,Axon 10s Pro 5G
 ZTE,Axon 11 4G
 ZTE,Axon 11 5G
+ZTE,Axon 11 SE
+ZTE,Axon 20
+ZTE,Axon 20 Extreme
+ZTE,Axon 30
+ZTE,Axon 30 Pro
+ZTE,Axon 30 Ultra
 ZTE,Axon 7
 ZTE,Axon 7 Max
 ZTE,Axon 7 mini
@@ -2821,7 +2950,9 @@ ZTE,Axon Max
 ZTE,Axon mini
 ZTE,Axon Pro
 ZTE,Blade 10 Prime
+ZTE,Blade 11 Prime
 ZTE,Blade 20
+ZTE,Blade 20 Pro
 ZTE,Blade A2
 ZTE,Blade A2 Plus
 ZTE,Blade A3
@@ -2838,6 +2969,7 @@ ZTE,Blade A610
 ZTE,Blade A7
 ZTE,Blade A7 Prime
 ZTE,Blade A7 Vita
+ZTE,Blade A7s
 ZTE,Blade A910
 ZTE,Blade Apex 3
 ZTE,Blade D6
@@ -2856,6 +2988,9 @@ ZTE,Blade S7
 ZTE,Blade V Plus
 ZTE,Blade V10
 ZTE,Blade V10 Vita
+ZTE,Blade V2020
+ZTE,Blade V30
+ZTE,Blade V30 Vita
 ZTE,Blade V7
 ZTE,Blade V7 Lite
 ZTE,Blade V7 Max
@@ -2867,6 +3002,7 @@ ZTE,Blade V8 Pro
 ZTE,Blade V9
 ZTE,Blade V9 Vita
 ZTE,Blade X
+ZTE,Blade X1
 ZTE,Blade X3
 ZTE,Blade X5
 ZTE,Blade X9
@@ -2899,6 +3035,12 @@ ZTE,nubia Red Magic 3
 ZTE,nubia Red Magic 3s
 ZTE,nubia Red Magic 5G
 ZTE,nubia Red Magic 5G Lite
+ZTE,nubia Red Magic 5S
+ZTE,nubia Red Magic 6
+ZTE,nubia Red Magic 6 Pro
+ZTE,nubia Red Magic 6R
+ZTE,nubia Red Magic 6s
+ZTE,nubia Red Magic 6s Pro
 ZTE,nubia Red Magic Mars
 ZTE,nubia V18
 ZTE,nubia Z11
@@ -2913,11 +3055,15 @@ ZTE,nubia Z17s
 ZTE,nubia Z18
 ZTE,nubia Z18 mini
 ZTE,nubia Z20
+ZTE,nubia Z30 Pro
 ZTE,nubia Z9
 ZTE,nubia Z9 Max
 ZTE,nubia Z9 mini
 ZTE,Obsidian
 ZTE,Open L
+ZTE,S30
+ZTE,S30 SE
+ZTE,S30 pro
 ZTE,Sonata 2
 ZTE,Tempo Go
 ZTE,Tempo X
@@ -2925,3 +3071,4 @@ ZTE,V5 Lux
 ZTE,Warp 7
 ZTE,Zmax 2
 ZTE,Zmax Pro
+Other,Other

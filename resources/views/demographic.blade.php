@@ -27,7 +27,7 @@
 	}
 
 
-
+	.error {color: #FF0000;}
 </style>
 
 
@@ -81,6 +81,7 @@
             </script>
             <hr size="4px;">
                 <div class="container">
+					<p><span class="error">* required field</span></p>
                     <form role="form" method="POST" action="/post">
                         @csrf
                         <!-- Age Range Select Menu -->
@@ -88,6 +89,7 @@
                                     <div class="col-md-4 col-centered">
                                 <div class="form-group">
                                     <label for="ageInput">Age:</label>
+									<span class="error">*</span>
                                     <select class="form-select form-select-sm" aria-label="Default select example" id="ageInput" name="ageInput" required onchange="enableButton()">
                                         <option value="">Select</option>
                                         <?php for($i = 18; $i <= 75; $i += 1){
@@ -103,6 +105,7 @@
                                     <div class="col-md-4 col-centered">
                                         <div class="form-group">
                                 <label for="glassesInput"><p>Are you currently wearing any vision correction?</p></label>
+								<span class="error">*</span>
                                 <select class="form-select form-select-sm" aria-label="Default select example" id="glassesInput" name="glassesInput" required onchange="enableButton()">
                                     <option value="">Select</option>	
                                     <option>No</option>
@@ -117,6 +120,7 @@
                     <div class="row">
                         <div class="col-md-4 col-centered">
                             <label for="genderInput">Gender:</label>
+							<span class="error">*</span>
                             <select class="form-select form-select-sm" aria-label="Default select example" id="genderInput" name="genderInput" required onchange="enableButton()">
                             <option value="">Select</option>
                             <option value="0">Male</option>
@@ -130,6 +134,7 @@
 				<div class="row">
                     <div class="col-md-4 col-centered">
 					<label for="brand">Select your mobile device brand:</label>
+					<span class="error">*</span>
 					<select class="form-select form-select-sm" aria-label="Default select example" id="brand" name="brand" required onchange="loadDeviceModels(this)">
 						<option value="">Select</option>
 					</select>
@@ -177,12 +182,37 @@
 		  </div>
 		</div>
 		
+		
+	<div class="modal fade" id="recorderModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title" id="staticBackdropLabel">Please enable your MediaRecorder API</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+			<ul>
+				<li>Please Go to Settings &#8594; Safari &#8594; Advanced &#8594; Experimental Features</li><br>
+				<li>Enable MediaRecorder</li>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#beginModal3" class="btn btn-lg btn-warning"> Ok</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+		
 		 
 
     </body>
 
         <!-- Script to determine device modal / type -->
     <script>
+	
+	if(typeof MediaRecorder == "undefined"){
+		var medaRecorderModal = new bootstrap.Modal(document.getElementById('recorderModal'), {});
+		medaRecorderModal.show();	
+	}
 	
 	var mobileOrTablet = 0;
     function mobileOrTabletCheck() {
@@ -202,6 +232,9 @@
 
 window.onload = mobileOrTabletCheck();
 let Finish = document.getElementById('home');
+
+
+
 
 Finish.addEventListener('click', (ev)=>{
                 window.location.href = "";
